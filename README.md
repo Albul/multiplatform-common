@@ -48,4 +48,10 @@ ifNotNull(
     a.call()
     // Do something with a, b, c
 }
+
+ifNotNullAnd(
+    model, model?.isActive
+) { model
+    model.call()
+}
 ```
