@@ -1,4 +1,4 @@
-package com.olekdia.mvp
+package com.olekdia.common
 
 expect class WeakReference<T : Any>(referred: T) {
     fun clear()

@@ -1,4 +1,4 @@
-package com.olekdia.mvp
+package com.olekdia.common
 
 actual class WeakReference<T : Any> actual constructor(referred: T) {
 

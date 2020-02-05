@@ -30,11 +30,18 @@ const val SCHEME_HTTPS = "https"
 const val UTF_8 = "UTF-8"
 
 //--------------- Math
+
 /**
- * 2 * PI in degrees
+ * 2*PI in degrees
  */
 const val DEG_2PI = 360F
+/**
+ * Float PI value
+ */
 const val PI = 3.141592653589793F
+/**
+ * Float golden ratio value
+ */
 const val GOLDEN_RATIO = 1.61803F
 
 //--------------- Bidi
