@@ -7,9 +7,52 @@ import kotlin.test.assertTrue
 class MathExtTest {
 
     @Test
-    fun roundTo() {
+    fun roundToInt() {
         assertEquals(30, 38 roundTo 15)
         assertEquals(50, 69 roundTo 25)
+        assertEquals(69, 69 roundTo 1)
+        assertEquals(69, 69 roundTo 3)
+        assertEquals(68, 69 roundTo 2)
+        assertEquals(-30, -32 roundTo 5)
+
+        assertEquals(2147483646, Int.MAX_VALUE roundTo 2)
+        assertEquals(2147483640, Int.MAX_VALUE roundTo 40)
+        assertEquals(-2147483640, Int.MIN_VALUE roundTo 40)
+        assertEquals(-2147483640, Int.MIN_VALUE roundTo -40)
+
+        assertEquals(-30, -38 roundTo 15)
+        assertEquals(-30, -38 roundTo -15)
+    }
+
+    @Test
+    fun roundToLong() {
+        assertEquals(30L, 38L roundTo 15L)
+        assertEquals(50L, 69L roundTo 25L)
+        assertEquals(69L, 69L roundTo 1L)
+        assertEquals(69L, 69L roundTo 3L)
+        assertEquals(68L, 69L roundTo 2L)
+        assertEquals(9223372036854775806L, Long.MAX_VALUE roundTo 2L)
+        assertEquals(9223372036854775800L, Long.MAX_VALUE roundTo 40L)
+        assertEquals(-9223372036854775800L, Long.MIN_VALUE roundTo 40L)
+        assertEquals(-9223372036854775800L, Long.MIN_VALUE roundTo -40L)
+
+        assertEquals(-30L, -38L roundTo 15L)
+        assertEquals(-30L, -38L roundTo -15L)
+    }
+
+    @Test
+    fun roundToFloat() {
+        assertEquals(32.0f, 32.5f roundTo 2f)
+        assertEquals(32.5f, 32.5f roundTo 2.5f)
+        assertEquals(29f, 32.5f roundTo 5.8f)
+        assertEquals(-29f, -32.5f roundTo -5.8f)
+        assertEquals(-29f, -32.5f roundTo 5.8f)
+        assertEquals(-29f, -32.5f roundTo 5.8f)
+        assertEquals(29f, 32.5f roundTo -5.8f)
+        assertEquals(32.4f, 32.5f roundTo 0.2f)
+        assertTrue((1f roundTo 0.3f) in 0.9f..0.91f)
+        assertTrue((1f roundTo 0.1f) in 0.9f..1f)
+        assertEquals(1f, 1f roundTo 1f)
     }
 
     @Test
@@ -38,6 +81,16 @@ class MathExtTest {
             val r = getRandom(start, end)
             assertTrue(r <= end)
             assertTrue(r >= start)
+        }
+    }
+
+    @Test
+    fun getRandomInt_startEqualsEnd() {
+        val start = 10
+        val end = 10
+
+        for (i in 0..100) {
+            assertEquals(10, getRandom(start, end))
         }
     }
 
