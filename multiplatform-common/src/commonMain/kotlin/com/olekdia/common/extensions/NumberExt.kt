@@ -46,7 +46,7 @@ fun Double.isRounded() = this == this.toInt().toDouble()
 fun Float.isRounded() = this == this.toInt().toFloat()
 
 /**
- * @return number of zero bits started from the right
+ * @return number of zero bits counted from the right to left
  */
 expect fun Int.numberOfTrailingZeros(): Int
 
