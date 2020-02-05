@@ -65,6 +65,8 @@ infix fun Float.roundToCeil(to: Int): Int =
     }
 
 /**
+ * @receiver a number of percents
+ * @param value a number
  * @return percent of a number
  */
 infix fun Int.percentOf(value: Int): Int = (value.toLong() * this / 100L).toInt()

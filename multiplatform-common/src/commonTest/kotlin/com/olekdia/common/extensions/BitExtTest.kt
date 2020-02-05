@@ -6,9 +6,10 @@ class BitExtTest {
 
     @Test
     fun toBitIndex() {
-        assertEquals(6, 1_000_000.toBitIndex())
-        assertEquals(2, 1_000_300.toBitIndex())
-        assertEquals(2, (-1_000_300).toBitIndex())
+        assertEquals(5, 0b100000.toBitIndex())
+        assertEquals(2, 0b100.toBitIndex())
+        assertEquals(1, 0b10.toBitIndex())
+        assertEquals(0, 0b1.toBitIndex())
     }
 
     @Test

@@ -3,7 +3,10 @@ package com.olekdia.common.extensions
 
 import kotlin.jvm.JvmName
 
-// Zero based, 1_000 > 4 index
+/**
+ * @receiver an integer that represents a single bit 0b010_000
+ * @return an zero based index of this bit, counting from the right to left
+ */
 fun Int.toBitIndex(): Int = this.numberOfTrailingZeros()
 
 fun Int.isBitEnabled(bit: Int): Boolean = this and bit > 0
