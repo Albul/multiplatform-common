@@ -39,9 +39,20 @@ infix fun Float.roundToCeil(to: Int): Int =
         (this - this % to).roundToInt() + to
     }
 
-infix fun Int.percentOf(value: Int): Int = value * this / 100
+/**
+ * @return percent of a number
+ */
+infix fun Int.percentOf(value: Int): Int = (value.toLong() * this / 100L).toInt()
 
-infix fun Int.percentOf(value: Long): Long = value * this / 100
+/**
+ * @return percent of a number. It gives approximate results for numbers bigger than 92233720000000000L
+ */
+infix fun Int.percentOf(value: Long): Long =
+    if (abs(value) > 92233720368547000L) {
+        value / 100L * this
+    } else {
+        value * this / 100L
+    }
 
 infix fun Int.divCeil(to: Int): Int = this / to + if (this % to == 0) 0 else 1
 
@@ -91,6 +102,9 @@ fun isInCircle(x: Float, y: Float, cx: Float, cy: Float, r: Float): Boolean =
 fun segmentLength(x1: Float, y1: Float, x2: Float, y2: Float): Double =
     sqrt((x1 - x2).toDouble() * (x1 - x2) + (y1 - y2) * (y1 - y2))
 
+/**
+ * Greatest common divisor
+ */
 fun gcd(a: Int, b: Int): Int {
     var varA = a
     var varB = b
@@ -105,8 +119,14 @@ fun gcd(a: Int, b: Int): Int {
     return varA + varB
 }
 
+/**
+ * Least common multiple
+ */
 fun lcm(a: Int, b: Int): Int = a / gcd(a, b) * b
 
+/**
+ * Least common multiple
+ */
 fun lcm(a: Int, b: Int, c: Int): Int = lcm(a, lcm(b, c))
 
 fun geomProgressionItemN(item1: Long, q: Double, n: Int): Double = item1 * q.pow((n - 1).toDouble())
