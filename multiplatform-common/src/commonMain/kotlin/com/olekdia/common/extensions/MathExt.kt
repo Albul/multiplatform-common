@@ -6,6 +6,10 @@ import kotlin.jvm.JvmName
 import kotlin.math.*
 import kotlin.random.Random
 
+/**
+ * @param places more or equals 0
+ * @return rounded number
+ */
 fun Double.round(places: Int): Double {
     var value = this
     require(places >= 0)
@@ -14,7 +18,10 @@ fun Double.round(places: Int): Double {
     value *= factor
     return value.roundToLong() / factor
 }
-
+/**
+ * @param places more or equals 0
+ * @return rounded number
+ */
 fun Float.round(places: Int): Float {
     var value = this
     require(places >= 0)
@@ -24,13 +31,31 @@ fun Float.round(places: Int): Float {
     return value.roundToInt() / factor
 }
 
-infix fun Float.roundTo(to: Float): Float = this - abs(this % to)
-
-infix fun Float.roundTo(to: Int): Int = (this - this % to).roundToInt()
-
-infix fun Double.roundTo(to: Int): Long = (this - this % to).roundToLong()
-
+/**
+ * @param to not equals 0
+ * @return number rounded to the input argument
+ */
 infix fun Int.roundTo(to: Int): Int = this - this % to
+/**
+ * @param to not equals 0
+ * @return number rounded to the input argument
+ */
+infix fun Long.roundTo(to: Long): Long = this - this % to
+/**
+ * @param to not equals 0
+ * @return number rounded to the input argument, approximate result due to rounding error
+ */
+infix fun Float.roundTo(to: Float): Float = this - this % to
+/**
+ * @param to not equals 0
+ * @return number rounded to the input argument
+ */
+infix fun Float.roundTo(to: Int): Int = (this - this % to).roundToInt()
+/**
+ * @param to not equals 0
+ * @return number rounded to the input argument
+ */
+infix fun Double.roundTo(to: Int): Long = (this - this % to).roundToLong()
 
 infix fun Float.roundToCeil(to: Int): Int =
     if (this % to == 0F) {
@@ -73,21 +98,33 @@ fun min(vararg args: Int): Int {
 }
 
 /**
+ * @throws IllegalArgumentException if max < min
  * @return Random Int from range min [inclusive], max [inclusive]
  */
-fun getRandom(min: Int, max: Int): Int = Random.nextInt(min, max + 1)
+fun getRandom(min: Int, max: Int): Int =
+    require(min <= max)
+        .let { Random.nextInt(min, max + 1) }
 /**
+ * @throws IllegalArgumentException if max < min
  * @return Random Long from range min [inclusive], max [inclusive]
  */
-fun getRandom(min: Long, max: Long): Long = Random.nextLong(min, max + 1)
+fun getRandom(min: Long, max: Long): Long =
+    require(min <= max)
+        .let { Random.nextLong(min, max + 1) }
 /**
+ * @throws IllegalArgumentException if max < min
  * @return Random Float from range min [inclusive], max [inclusive]
  */
-fun getRandom(min: Float, max: Float): Float = Random.nextFloat() * (max - min) + min
+fun getRandom(min: Float, max: Float): Float =
+    require(min <= max)
+        .let { Random.nextFloat() * (max - min) + min }
 /**
+ * @throws IllegalArgumentException if max < min
  * @return Random Double from range min [inclusive], max [inclusive]
  */
-fun getRandom(min: Double, max: Double): Double = Random.nextDouble() * (max - min) + min
+fun getRandom(min: Double, max: Double): Double =
+    require(min <= max)
+        .let { Random.nextDouble() * (max - min) + min }
 /**
  * @return Boolean true or false
  */
