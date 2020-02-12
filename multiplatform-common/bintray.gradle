@@ -54,8 +54,6 @@ bintray {
 bintrayUpload.doFirst {
     publications = publishing.publications.collect {
         it.name
-    }.findAll {
-        it != "kotlinMultiplatform"
     }
 }
 
