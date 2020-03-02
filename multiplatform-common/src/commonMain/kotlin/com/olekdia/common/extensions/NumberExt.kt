@@ -46,9 +46,17 @@ fun Double.isRounded() = this == this.toInt().toDouble()
  */
 fun Float.isRounded() = this == this.toInt().toFloat()
 
-/* To get integer part of a float */
+/**
+ * @return integer part of a double value
+ */
 val Double.intPart: Int
-        get() = if (this >= 0) floor(this).toInt() else floor(this).toInt() + 1
+        get() = if (this >= 0.0) floor(this).toInt() else floor(this).toInt() + 1
+
+/**
+ * @return integer part of a float value
+ */
+val Float.intPart: Int
+    get() = if (this >= 0F) floor(this).toInt() else floor(this).toInt() + 1
 
 /**
  * @return number of zero bits counted from the right to left

@@ -120,4 +120,24 @@ class NumberExtTest {
         assertEquals(10, 1234567890.numberOfDigits())
         assertEquals(10, 1000000000.numberOfDigits())
     }
+
+    @Test
+    fun intPart() {
+        assertEquals(0.0.intPart, 0)
+        assertEquals(0.5555.intPart, 0)
+        assertEquals(4.5.intPart, 4)
+        assertEquals(4.9999.intPart, 4)
+        assertEquals(4.00001.intPart, 4)
+        assertEquals((-4.9999).intPart, -4)
+        assertEquals((-4.0001).intPart, -4)
+
+
+        assertEquals(0f.intPart, 0)
+        assertEquals(0.5555f.intPart, 0)
+        assertEquals(4.5f.intPart, 4)
+        assertEquals(4.9999f.intPart, 4)
+        assertEquals(4.00001f.intPart, 4)
+        assertEquals((-4.9999f).intPart, -4)
+        assertEquals((-4.0001f).intPart, -4)
+    }
 }
