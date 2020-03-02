@@ -3,6 +3,7 @@
 package com.olekdia.common.extensions
 
 import kotlin.jvm.JvmName
+import kotlin.math.floor
 import kotlin.math.log10
 
 inline val Int.u: Int get() = this
@@ -44,6 +45,10 @@ fun Double.isRounded() = this == this.toInt().toDouble()
  * @return true if Float has integer value, like 3.0f, 1.0f
  */
 fun Float.isRounded() = this == this.toInt().toFloat()
+
+/* To get integer part of a float */
+val Double.intPart: Int
+        get() = if (this >= 0) floor(this).toInt() else floor(this).toInt() + 1
 
 /**
  * @return number of zero bits counted from the right to left

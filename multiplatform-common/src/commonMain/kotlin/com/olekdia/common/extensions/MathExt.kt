@@ -99,6 +99,18 @@ fun min(vararg args: Int): Int {
     return minResult
 }
 
+fun max(vararg args: Int): Int {
+    var maxResult = Int.MIN_VALUE
+
+    for (arg in args) {
+        if (arg > maxResult) {
+            maxResult = arg
+        }
+    }
+
+    return maxResult
+}
+
 /**
  * @throws IllegalArgumentException if max < min
  * @return Random Int from range min [inclusive], max [inclusive]
@@ -161,14 +173,17 @@ fun gcd(a: Int, b: Int): Int {
 /**
  * Least common multiple
  */
-fun lcm(a: Int, b: Int): Int = a / gcd(a, b) * b
+fun lcm(a: Int, b: Int): Int =
+    a / gcd(a, b) * b
 
 /**
  * Least common multiple
  */
-fun lcm(a: Int, b: Int, c: Int): Int = lcm(a, lcm(b, c))
+fun lcm(a: Int, b: Int, c: Int): Int =
+    lcm(a, lcm(b, c))
 
-fun geomProgressionItemN(item1: Long, q: Double, n: Int): Double = item1 * q.pow((n - 1).toDouble())
+fun geomProgressionItemN(item1: Long, q: Double, n: Int): Double =
+    item1 * q.pow((n - 1).toDouble())
 
 fun Int.factorial(): Long {
     var num: Long = this.toLong()
@@ -180,3 +195,6 @@ fun Int.factorial(): Long {
 
     return fact
 }
+
+fun combination(n: Int, k: Int): Long =
+    n.factorial() / (k.factorial() * (n - k).factorial())
