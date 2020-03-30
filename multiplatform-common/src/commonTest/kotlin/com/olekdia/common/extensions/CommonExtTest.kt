@@ -578,5 +578,89 @@ class CommonExtTest {
         assertFalse(isCalled)
     }
 
+//--------------------------------------------------------------------------------------------------
 
+    @Test
+    fun let_with2NullParams() {
+        val arg1: String? = null
+        val arg2: String? = null
+
+        val result = let(
+            arg1, arg2
+        ) { a1, a2 ->
+            (a1 ?: "null") + (a2 ?: "null")
+        }
+        assertEquals("nullnull", result)
+    }
+
+    @Test
+    fun let_with2NotNullParams() {
+        val arg1: String? = null
+        val arg2: String? = "arg"
+
+        val result = let(
+            arg1, arg2
+        ) { a1, a2 ->
+            (a1 ?: "null") + (a2 ?: "null")
+        }
+        assertEquals("nullarg", result)
+    }
+
+    @Test
+    fun let_with3NullParams() {
+        val arg1: String? = null
+        val arg2: String? = null
+        val arg3: String? = null
+
+        val result = let(
+            arg1, arg2, arg3
+        ) { a1, a2, a3 ->
+            (a1 ?: "null") + (a2 ?: "null") + (a3 ?: "null")
+        }
+        assertEquals("nullnullnull", result)
+    }
+
+    @Test
+    fun let_with3NotNullParams() {
+        val arg1: String? = null
+        val arg2: String? = "arg2"
+        val arg3: String? = "arg3"
+
+        val result = let(
+            arg1, arg2, arg3
+        ) { a1, a2, a3 ->
+            (a1 ?: "null") + (a2 ?: "null") + (a3 ?: "null")
+        }
+        assertEquals("nullarg2arg3", result)
+    }
+
+    @Test
+    fun let_with4NotNullParams() {
+        val arg1: String? = null
+        val arg2: String? = "arg2"
+        val arg3: String? = "arg3"
+        val arg4: String? = "arg4"
+
+        val result = let(
+            arg1, arg2, arg3, arg4
+        ) { a1, a2, a3, a4 ->
+            (a1 ?: "null") + (a2 ?: "null") + (a3 ?: "null")  + (a4 ?: "null")
+        }
+        assertEquals("nullarg2arg3arg4", result)
+    }
+
+    @Test
+    fun let_with4NullParams() {
+        val arg1: String? = null
+        val arg2: String? = null
+        val arg3: String? = null
+        val arg4: String? = null
+
+        val result = let(
+            arg1, arg2, arg3, arg4
+        ) { a1, a2, a3, a4 ->
+            (a1 ?: "null") + (a2 ?: "null") + (a3 ?: "null")  + (a4 ?: "null")
+        }
+        assertEquals("nullnullnullnull", result)
+    }
 }

@@ -4,6 +4,10 @@ package com.olekdia.common.extensions
 
 import kotlin.jvm.JvmName
 
+//--------------------------------------------------------------------------------------------------
+// ifNotNull
+//--------------------------------------------------------------------------------------------------
+
 inline fun <T, R> T?.ifNotNull(block: T.() -> R) {
     if (this != null) block()
 }
@@ -41,9 +45,9 @@ inline fun <A, B, C, D, R> ifNotNull(a: A?, b: B?, c: C?, d: D?, code: (A, B, C,
         null
     }
 
-inline fun <T, R> T?.ifNull(block: T.() -> R) {
-    if (this == null) block()
-}
+//--------------------------------------------------------------------------------------------------
+// ifNotNullAnd
+//--------------------------------------------------------------------------------------------------
 
 inline fun <A, R> ifNotNullAnd(
     a: A?, exp1: Boolean, code: (A) -> R
@@ -100,6 +104,21 @@ inline fun <A, R> ifNotNullAnd(
         null
     }
 
+//--------------------------------------------------------------------------------------------------
+// let
+//--------------------------------------------------------------------------------------------------
+
+inline fun <A, B, R> let(a: A?, b: B?, code: (A?, B?) -> R?): R? =
+    code(a, b)
+
+inline fun <A, B, C, R> let(a: A?, b: B?, c: C?, code: (A?, B?, C?) -> R?): R? =
+    code(a, b, c)
+
+inline fun <A, B, C, D, R> let(a: A?, b: B?, c: C?, d: D?, code: (A?, B?, C?, D?) -> R?): R? =
+    code(a, b, c, d)
+
+//--------------------------------------------------------------------------------------------------
+
 inline fun <A, R> ifNotNullElse(a: A?, ifCode: (A) -> R, elseCode: () -> R): R? =
     if (a != null) {
         ifCode(a)
@@ -125,4 +144,8 @@ inline fun Boolean?.ifFalse(block: () -> Unit) {
 
 inline fun Boolean?.ifTrue(block: () -> Unit) {
     if (this == true) block()
+}
+
+inline fun <T, R> T?.ifNull(block: T.() -> R) {
+    if (this == null) block()
 }
