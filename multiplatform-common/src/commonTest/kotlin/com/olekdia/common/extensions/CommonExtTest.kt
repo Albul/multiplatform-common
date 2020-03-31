@@ -663,4 +663,19 @@ class CommonExtTest {
         }
         assertEquals("nullnullnullnull", result)
     }
+
+    @Test
+    fun let_withMixParams() {
+        val arg1: String? = null
+        val arg2: String = "Text"
+        val arg3: String? = null
+        val arg4: String = "Txt2"
+
+        val result = let(
+            arg1, arg2, arg3, arg4
+        ) { a1, a2, a3, a4 ->
+            (a1 ?: "null") + a2.length + (a3 ?: "null")  + a4
+        }
+        assertEquals("null4nullTxt2", result)
+    }
 }

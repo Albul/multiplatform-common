@@ -1,7 +1,7 @@
 # Multiplatform common
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
-[ ![Download](https://api.bintray.com/packages/olekdia/olekdia/multiplatform-common/images/download.svg?version=0.1.5) ](https://bintray.com/olekdia/olekdia/multiplatform-common/0.1.5/link)
+[ ![Download](https://api.bintray.com/packages/olekdia/olekdia/multiplatform-common/images/download.svg?version=0.1.6) ](https://bintray.com/olekdia/olekdia/multiplatform-common/0.1.6/link)
 
 ---
 
@@ -15,16 +15,16 @@ To use in multiplatform project add:
 ```gradle
 dependencies {
   ...
-  implementation("com.olekdia:multiplatform-common:0.1.5")
+  implementation("com.olekdia:multiplatform-common:0.1.6")
 }
 ```
 
 To use in platform specific projects include one of the following:
 ```gradle
 dependencies {
-  implementation("com.olekdia:multiplatform-common-jvm:0.1.5")
-  implementation("com.olekdia:multiplatform-common-js:0.1.5")
-  implementation("com.olekdia:multiplatform-common-native:0.1.5")
+  implementation("com.olekdia:multiplatform-common-jvm:0.1.6")
+  implementation("com.olekdia:multiplatform-common-js:0.1.6")
+  implementation("com.olekdia:multiplatform-common-native:0.1.6")
 }
 ```
 

@@ -108,13 +108,13 @@ inline fun <A, R> ifNotNullAnd(
 // let
 //--------------------------------------------------------------------------------------------------
 
-inline fun <A, B, R> let(a: A?, b: B?, code: (A?, B?) -> R): R =
+inline fun <A, B, R> let(a: A, b: B, code: (A, B) -> R): R =
     code(a, b)
 
-inline fun <A, B, C, R> let(a: A?, b: B?, c: C?, code: (A?, B?, C?) -> R): R =
+inline fun <A, B, C, R> let(a: A, b: B, c: C, code: (A, B, C) -> R): R =
     code(a, b, c)
 
-inline fun <A, B, C, D, R> let(a: A?, b: B?, c: C?, d: D?, code: (A?, B?, C?, D?) -> R): R =
+inline fun <A, B, C, D, R> let(a: A, b: B, c: C, d: D, code: (A, B, C, D) -> R): R =
     code(a, b, c, d)
 
 //--------------------------------------------------------------------------------------------------
