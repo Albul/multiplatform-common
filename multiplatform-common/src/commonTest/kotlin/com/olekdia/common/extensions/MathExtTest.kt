@@ -2,6 +2,7 @@ package com.olekdia.common.extensions
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFails
 import kotlin.test.assertTrue
 
 class MathExtTest {
@@ -72,6 +73,10 @@ class MathExtTest {
         assertTrue((98 percentOf Long.MAX_VALUE) in 9038904596117680280L..9038904596117680300L)
     }
 
+//--------------------------------------------------------------------------------------------------
+//  getRandom in range
+//--------------------------------------------------------------------------------------------------
+
     @Test
     fun getRandomInt() {
         val start = -10
@@ -95,6 +100,16 @@ class MathExtTest {
     }
 
     @Test
+    fun getRandomInt_startBiggerEnd_fails() {
+        val start = 10
+        val end = 9
+
+        assertFails {
+            val r = getRandom(start, end)
+        }
+    }
+
+    @Test
     fun getRandomLong() {
         val start = -10L
         val end = 10L
@@ -103,6 +118,16 @@ class MathExtTest {
             val r = getRandom(start, end)
             assertTrue(r <= end)
             assertTrue(r >= start)
+        }
+    }
+
+    @Test
+    fun getRandomLong_startBiggerEnd_fails() {
+        val start = 10L
+        val end = 9L
+
+        assertFails {
+            val r = getRandom(start, end)
         }
     }
 
@@ -119,6 +144,16 @@ class MathExtTest {
     }
 
     @Test
+    fun getRandomFloat_startBiggerEnd_fails() {
+        val start = 9.5F
+        val end = 4.5F
+
+        assertFails {
+            val r = getRandom(start, end)
+        }
+    }
+
+    @Test
     fun getRandomDouble() {
         val start = -9.5
         val end = 9.5
@@ -127,6 +162,16 @@ class MathExtTest {
             val r = getRandom(start, end)
             assertTrue(r <= end)
             assertTrue(r >= start)
+        }
+    }
+
+    @Test
+    fun getRandomDouble_startBiggerEnd_fails() {
+        val start = 9.5
+        val end = 4.5
+
+        assertFails {
+            val r = getRandom(start, end)
         }
     }
 
@@ -146,4 +191,217 @@ class MathExtTest {
         assertTrue(trueFound)
         assertTrue(falseFound)
     }
+
+//--------------------------------------------------------------------------------------------------
+//  getRandom from array
+//--------------------------------------------------------------------------------------------------
+
+    @Test
+    fun getRandomIntArray() {
+        val array = intArrayOf(
+            3, 5, 8, 10, 16, 23
+        )
+        for (i in 0..100) {
+            val r = getRandom(array)
+            assertTrue(array.contains(r))
+        }
+
+        val arraySingle = intArrayOf(
+            3
+        )
+        for (i in 0..10) {
+            val r = getRandom(arraySingle)
+            assertEquals(3, r)
+        }
+    }
+
+    @Test
+    fun getRandomIntArray_zeroSize_fails() {
+        assertFails {
+            val r = getRandom(intArrayOf())
+        }
+    }
+
+    @Test
+    fun getRandomLongArray() {
+        val array = longArrayOf(
+            3L, 5L, 8L, 10L, 16L, 23L
+        )
+        for (i in 0..100) {
+            val r = getRandom(array)
+            assertTrue(array.contains(r))
+        }
+
+        val arraySingle = longArrayOf(
+            3L
+        )
+        for (i in 0..10) {
+            val r = getRandom(arraySingle)
+            assertEquals(3L, r)
+        }
+    }
+
+    @Test
+    fun getRandomLongArray_zeroSize_fails() {
+        assertFails {
+            val r = getRandom(longArrayOf())
+        }
+    }
+
+    @Test
+    fun getRandomFloatArray() {
+        val array = floatArrayOf(
+            3F, 5.5F, 8.1F, 10.4F, 16F, 23.23F
+        )
+        for (i in 0..100) {
+            val r = getRandom(array)
+            assertTrue(array.contains(r))
+        }
+
+        val arraySingle = floatArrayOf(
+            3.3F
+        )
+        for (i in 0..10) {
+            val r = getRandom(arraySingle)
+            assertEquals(3.3F, r)
+        }
+    }
+
+    @Test
+    fun getRandomFloatArray_zeroSize_fails() {
+        assertFails {
+            val r = getRandom(floatArrayOf())
+        }
+    }
+
+    @Test
+    fun getRandomDoubleArray() {
+        val array = doubleArrayOf(
+            3.0, 5.5, 8.1, 10.4, 16.0, 23.23
+        )
+        for (i in 0..100) {
+            val r = getRandom(array)
+            assertTrue(array.contains(r))
+        }
+
+        val arraySingle = doubleArrayOf(
+            3.3
+        )
+        for (i in 0..10) {
+            val r = getRandom(arraySingle)
+            assertEquals(3.3, r)
+        }
+    }
+
+    @Test
+    fun getRandomDoubleArray_zeroSize_fails() {
+        assertFails {
+            val r = getRandom(doubleArrayOf())
+        }
+    }
+
+    @Test
+    fun getRandomCharArray() {
+        val array = charArrayOf(
+            'a', 'c', 'r', 'ю', 'Ф'
+        )
+        for (i in 0..100) {
+            val r = getRandom(array)
+            assertTrue(array.contains(r))
+        }
+
+        val arraySingle = charArrayOf(
+            '$'
+        )
+        for (i in 0..10) {
+            val r = getRandom(arraySingle)
+            assertEquals('$', r)
+        }
+    }
+
+    @Test
+    fun getRandomCharArray_zeroSize_fails() {
+        assertFails {
+            val r = getRandom(charArrayOf())
+        }
+    }
+
+    @Test
+    fun getRandomBooleanArray() {
+        val array = booleanArrayOf(
+            true, true, true, true, true
+        )
+        for (i in 0..100) {
+            val r = getRandom(array)
+            assertTrue(array.contains(r))
+        }
+
+        val arraySingle = booleanArrayOf(
+            false
+        )
+        for (i in 0..10) {
+            val r = getRandom(arraySingle)
+            assertEquals(false, r)
+        }
+    }
+
+    @Test
+    fun getRandomBooleanArray_zeroSize_fails() {
+        assertFails {
+            val r = getRandom(booleanArrayOf())
+        }
+    }
+
+    @Test
+    fun getRandomStringArray() {
+        val array = arrayOf<String>(
+            "One", "Two", "Three", "Four"
+        )
+        for (i in 0..100) {
+            val r = getRandom(array)
+            assertTrue(array.contains(r))
+        }
+
+        val arraySingle = arrayOf<String>(
+            "Random"
+        )
+        for (i in 0..10) {
+            val r = getRandom(arraySingle)
+            assertEquals("Random", r)
+        }
+    }
+
+    @Test
+    fun getRandomStringArray_zeroSize_fails() {
+        assertFails {
+            val r = getRandom(arrayOf<String>())
+        }
+    }
+
+    @Test
+    fun getRandomAnyArray() {
+        val array = arrayOf<Any>(
+            'a', "Random", 3, 4.5F, String.CASE_INSENSITIVE_ORDER
+        )
+        for (i in 0..100) {
+            val r = getRandom(array)
+            assertTrue(array.contains(r))
+        }
+
+        val arraySingle = arrayOf<Any>(
+            "Random"
+        )
+        for (i in 0..10) {
+            val r = getRandom(arraySingle)
+            assertEquals("Random", r)
+        }
+    }
+
+    @Test
+    fun getRandomAnyArray_zeroSize_fails() {
+        assertFails {
+            val r = getRandom(arrayOf<Any>())
+        }
+    }
+
 }

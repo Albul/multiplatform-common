@@ -111,6 +111,10 @@ fun max(vararg args: Int): Int {
     return maxResult
 }
 
+//--------------------------------------------------------------------------------------------------
+//  getRandom
+//--------------------------------------------------------------------------------------------------
+
 /**
  * @throws IllegalArgumentException if max < min
  * @return Random Int from range min [inclusive], max [inclusive]
@@ -143,6 +147,72 @@ fun getRandom(min: Double, max: Double): Double =
  * @return Boolean true or false
  */
 fun getRandom(): Boolean = Random.nextBoolean()
+
+/**
+ * @throws IllegalArgumentException if array is empty
+ * @return Random value from array
+ */
+fun getRandom(array: IntArray): Int =
+    require(array.isNotEmpty())
+        .let { array[Random.nextInt(0, array.size)] }
+
+/**
+ * @throws IllegalArgumentException if array is empty
+ * @return Random value from array
+ */
+fun getRandom(array: LongArray): Long =
+    require(array.isNotEmpty())
+        .let { array[Random.nextInt(0, array.size)] }
+
+/**
+ * @throws IllegalArgumentException if array is empty
+ * @return Random value from array
+ */
+fun getRandom(array: FloatArray): Float =
+    require(array.isNotEmpty())
+        .let { array[Random.nextInt(0, array.size)] }
+
+/**
+ * @throws IllegalArgumentException if array is empty
+ * @return Random value from array
+ */
+fun getRandom(array: DoubleArray): Double =
+    require(array.isNotEmpty())
+        .let { array[Random.nextInt(0, array.size)] }
+
+/**
+ * @throws IllegalArgumentException if array is empty
+ * @return Random value from array
+ */
+fun getRandom(array: CharArray): Char =
+    require(array.isNotEmpty())
+        .let { array[Random.nextInt(0, array.size)] }
+
+/**
+ * @throws IllegalArgumentException if array is empty
+ * @return Random value from array
+ */
+fun getRandom(array: BooleanArray): Boolean =
+    require(array.isNotEmpty())
+        .let { array[Random.nextInt(0, array.size)] }
+
+/**
+ * @throws IllegalArgumentException if array is empty
+ * @return Random value from array
+ */
+fun getRandom(array: Array<String>): String =
+    require(array.isNotEmpty())
+        .let { array[Random.nextInt(0, array.size)] }
+
+/**
+ * @throws IllegalArgumentException if array is empty
+ * @return Random value from array
+ */
+fun getRandom(array: Array<Any>): Any =
+    require(array.isNotEmpty())
+        .let { array[Random.nextInt(0, array.size)] }
+
+//--------------------------------------------------------------------------------------------------
 
 inline fun Double.toRadians(): Double = this * kotlin.math.PI / 180.0
 inline fun Float.toRadians(): Float = this * com.olekdia.common.PI / 180F
