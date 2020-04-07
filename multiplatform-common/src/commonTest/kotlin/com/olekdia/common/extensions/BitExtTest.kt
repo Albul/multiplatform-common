@@ -58,6 +58,7 @@ class BitExtTest {
     @Test
     fun addBitIndex() {
         assertEquals(0b1_010_110, 0b1_010_100.addBitIndex(1))
+        assertEquals(0b1_010_110, 0b1_010_110.addBitIndex(1)) // Was added before
         assertNotEquals(0b1_010_111, 0b1_010_100.addBitIndex(1))
         assertEquals(0b1_010_101, 0b1_010_100.addBitIndex(0))
         assertEquals(0b11_010_100, 0b1_010_100.addBitIndex(7))
@@ -68,6 +69,7 @@ class BitExtTest {
     @Test
     fun addBitIndexLong() {
         assertEquals(0b1_010_110L, 0b1_010_100L.addBitIndex(1))
+        assertEquals(0b1_010_110L, 0b1_010_110L.addBitIndex(1)) // Was added before
         assertEquals(0b1_010_101L, 0b1_010_100L.addBitIndex(0))
         assertEquals(0b0_011_111L, 0b0_010_100L.addBitIndex(0).addBitIndex(1).addBitIndex(3))
     }
@@ -82,6 +84,7 @@ class BitExtTest {
     @Test
     fun subtractBitIndex() {
         assertEquals(0b1_010_100, 0b1_010_110.subtractBitIndex(1))
+        assertEquals(0b1_010_100, 0b1_010_100.subtractBitIndex(1)) // Was subtracted before
         assertEquals(0b1_010_100, 0b1_010_101.subtractBitIndex(0))
         assertEquals(0b0_011_100, 0b0_011_111.subtractBitIndex(0).subtractBitIndex(1))
     }
