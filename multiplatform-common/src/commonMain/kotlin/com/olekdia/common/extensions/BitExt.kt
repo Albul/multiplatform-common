@@ -11,7 +11,11 @@ fun Int.toBitIndex(): Int = this.numberOfTrailingZeros()
 
 fun Int.isBitEnabled(bit: Int): Boolean = this and bit > 0
 
+fun Long.isBitEnabled(bit: Long): Boolean = this and bit > 0L
+
 fun Int.isBitIndexEnabled(bitIndex: Int): Boolean = this and (1 shl bitIndex) > 0
+
+fun Long.isBitIndexEnabled(bitIndex: Int): Boolean = this and (1L shl bitIndex) > 0
 
 fun Int.addBit(bit: Int): Int = this or bit
 
@@ -44,3 +48,17 @@ fun Int.subtractBitIndexes(vararg args: Int): Int {
     }
     return bitSet
 }
+
+fun Int.setBitIndex(bitIndex: Int, isEnabled: Boolean) =
+    if (isEnabled) {
+        this.addBitIndex(bitIndex)
+    } else {
+        this.subtractBitIndex(bitIndex)
+    }
+
+fun Long.setBitIndex(bitIndex: Int, isEnabled: Boolean) =
+    if (isEnabled) {
+        this.addBitIndex(bitIndex)
+    } else {
+        this.subtractBitIndex(bitIndex)
+    }

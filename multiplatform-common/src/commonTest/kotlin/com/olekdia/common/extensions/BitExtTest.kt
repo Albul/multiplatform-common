@@ -23,6 +23,16 @@ class BitExtTest {
     }
 
     @Test
+    fun isBitEnabledLong() {
+        assertTrue(0b1_010_100L.isBitEnabled(0b1_000_000L))
+        assertFalse(0b1_010_100L.isBitEnabled(0b100_000L))
+        assertTrue(0b1_010_100L.isBitEnabled(0b10_000L))
+        assertTrue(0b1_010_100L.isBitEnabled(0b100L))
+        assertFalse(0b1_010_100L.isBitEnabled(0b10L))
+        assertTrue(0b1_010_100L.isBitEnabled(-0b100L))
+    }
+
+    @Test
     fun isBitIndexEnabled() {
         assertTrue(0b1_010_100.isBitIndexEnabled(6))
         assertFalse(0b1_010_100.isBitIndexEnabled(5))
@@ -31,6 +41,17 @@ class BitExtTest {
         assertFalse(0b1_010_100.isBitIndexEnabled(1))
         assertFalse(0b1_010_100.isBitIndexEnabled(0))
         assertTrue(0b1_010_101.isBitIndexEnabled(0))
+    }
+
+    @Test
+    fun isBitIndexEnabledLong() {
+        assertTrue(0b1_010_100L.isBitIndexEnabled(6))
+        assertFalse(0b1_010_100L.isBitIndexEnabled(5))
+        assertTrue(0b1_010_100L.isBitIndexEnabled(4))
+        assertTrue(0b1_010_100L.isBitIndexEnabled(2))
+        assertFalse(0b1_010_100L.isBitIndexEnabled(1))
+        assertFalse(0b1_010_100L.isBitIndexEnabled(0))
+        assertTrue(0b1_010_101L.isBitIndexEnabled(0))
     }
 
     @Test
@@ -101,5 +122,25 @@ class BitExtTest {
     fun subtractBitIndexes() {
         assertEquals(0b1_010_000, 0b1_111_110.subtractBitIndexes(1, 2, 3, 5))
         assertEquals(0, 0.subtractBitIndexes(0, 2, 5))
+    }
+
+    @Test
+    fun setBitIndex() {
+        assertEquals(0b1_010_100, 0b1_010_110.setBitIndex(1, false))
+        assertEquals(0b1_010_100, 0b1_010_100.setBitIndex(1, false)) // Was subtracted before
+        assertEquals(0b1_010_100, 0b1_010_101.setBitIndex(0, false))
+
+        assertEquals(0b1_010_101, 0b1_010_100.setBitIndex(0, true))
+        assertEquals(0b11_010_100, 0b1_010_100.setBitIndex(7, true))
+    }
+
+    @Test
+    fun setBitIndexLong() {
+        assertEquals(0b1_010_100L, 0b1_010_110L.setBitIndex(1, false))
+        assertEquals(0b1_010_100L, 0b1_010_100L.setBitIndex(1, false)) // Was subtracted before
+        assertEquals(0b1_010_100L, 0b1_010_101L.setBitIndex(0, false))
+
+        assertEquals(0b1_010_101L, 0b1_010_100L.setBitIndex(0, true))
+        assertEquals(0b11_010_100L, 0b1_010_100L.setBitIndex(7, true))
     }
 }
