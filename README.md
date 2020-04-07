@@ -1,7 +1,7 @@
 # Multiplatform common
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
-[ ![Download](https://api.bintray.com/packages/olekdia/olekdia/multiplatform-common/images/download.svg?version=0.1.7) ](https://bintray.com/olekdia/olekdia/multiplatform-common/0.1.7/link)
+[ ![Download](https://api.bintray.com/packages/olekdia/olekdia/multiplatform-common/images/download.svg?version=0.1.8) ](https://bintray.com/olekdia/olekdia/multiplatform-common/0.1.8/link)
 
 ---
 
@@ -15,23 +15,17 @@ To use in multiplatform project add:
 ```gradle
 dependencies {
   ...
-  implementation("com.olekdia:multiplatform-common:0.1.7")
+  implementation("com.olekdia:multiplatform-common:0.1.8")
 }
 ```
 
 To use in platform specific projects include one of the following:
 ```gradle
 dependencies {
-  implementation("com.olekdia:multiplatform-common-jvm:0.1.7")
-  implementation("com.olekdia:multiplatform-common-js:0.1.7")
-  implementation("com.olekdia:multiplatform-common-native:0.1.7")
+  implementation("com.olekdia:multiplatform-common-jvm:0.1.8")
+  implementation("com.olekdia:multiplatform-common-js:0.1.8")
+  implementation("com.olekdia:multiplatform-common-native:0.1.8")
 }
-```
-
-Make sure your Gradle vesion is 5.3+, and that you have metadata enabled in settings.gradle
-
-```gradle
-enableFeaturePreview("GRADLE_METADATA")
 ```
 
 ### Extensions
