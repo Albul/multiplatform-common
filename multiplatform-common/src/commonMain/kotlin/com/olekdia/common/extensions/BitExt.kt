@@ -27,11 +27,11 @@ fun Long.subtractBit(bit: Long): Long = this and bit.inv()
 
 fun Int.addBitIndex(bitIndex: Int): Int = this or (1 shl bitIndex)
 
-fun Long.addBitIndex(bitIndex: Int): Long = this or (1 shl bitIndex).toLong()
+fun Long.addBitIndex(bitIndex: Int): Long = this or (1L shl bitIndex)
 
 fun Int.subtractBitIndex(bitIndex: Int): Int = this and (1 shl bitIndex).inv()
 
-fun Long.subtractBitIndex(bitIndex: Int): Long = this and (1 shl bitIndex).inv().toLong()
+fun Long.subtractBitIndex(bitIndex: Int): Long = this and (1L shl bitIndex).inv()
 
 fun Int.addBitIndexes(vararg args: Int): Int {
     var bitSet = this
