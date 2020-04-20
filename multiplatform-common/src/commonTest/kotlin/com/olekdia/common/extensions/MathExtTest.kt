@@ -51,8 +51,8 @@ class MathExtTest {
         assertEquals(-29f, -32.5f roundTo 5.8f)
         assertEquals(29f, 32.5f roundTo -5.8f)
         assertEquals(32.4f, 32.5f roundTo 0.2f)
-        assertTrue((1f roundTo 0.3f) in 0.9f..0.91f)
-        assertTrue((1f roundTo 0.1f) in 0.9f..1f)
+        assertTrue((1f roundTo 0.3f) in 0.89f..0.91f)
+        assertTrue((1f roundTo 0.1f) in 0.89f..1f)
         assertEquals(1f, 1f roundTo 1f)
     }
 
@@ -263,7 +263,7 @@ class MathExtTest {
         )
         for (i in 0..10) {
             val r = getRandom(arraySingle)
-            assertEquals(3.3F, r)
+            assertEquals(arraySingle[0], r)
         }
     }
 
