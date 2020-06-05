@@ -317,8 +317,14 @@ fun Int.toMixedColor(componentToMix: Int): Int =
         (this.blue + componentToMix) / 2
     )
 
+/**
+ * Convert ARGB color to hex representation #aarrggbb (lower case)
+ */
 fun Int.toArgbString(): String =
-    "#${alpha.toStringColorComponent()}${red.toStringColorComponent()}${green.toStringColorComponent()}${blue.toStringColorComponent()}".toUpperCase()
+    "#${alpha.toStringColorComponent()}${red.toStringColorComponent()}${green.toStringColorComponent()}${blue.toStringColorComponent()}"
 
+/**
+ * Convert ARGB color to hex representation #rrggbb (lower case)
+ */
 fun Int.toRgbString(): String =
-    "#${red.toStringColorComponent()}${green.toStringColorComponent()}${blue.toStringColorComponent()}".toUpperCase()
+    "#${red.toStringColorComponent()}${green.toStringColorComponent()}${blue.toStringColorComponent()}"
