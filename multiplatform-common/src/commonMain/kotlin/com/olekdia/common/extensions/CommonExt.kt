@@ -146,6 +146,6 @@ inline fun Boolean?.ifTrue(block: () -> Unit) {
     if (this == true) block()
 }
 
-inline fun <T, R> T?.ifNull(block: T.() -> R) {
+inline fun <T, R> T?.ifNull(block: T?.() -> R) {
     if (this == null) block()
 }
