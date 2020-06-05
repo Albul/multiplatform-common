@@ -19,6 +19,9 @@ inline fun Float.toIntColorComponent(): Int =
 inline fun Int.toFloatColorComponent(): Float =
     this / MAX_COLOR_COMPONENT_F
 
+fun Int.toStringColorComponent(): String =
+    this.toString(16).let { if (it.length == 1) "0${it}" else it }
+
 //--------------------------------------------------------------------------------------------------
 //  Getters of components
 //--------------------------------------------------------------------------------------------------
@@ -314,29 +317,8 @@ fun Int.toMixedColor(componentToMix: Int): Int =
         (this.blue + componentToMix) / 2
     )
 
-@ExperimentalUnsignedTypes
 fun Int.toArgbString(): String =
-    this.toUInt()
-        .toString(16)
-        .let { hex ->
-            when (hex.length) {
-                5 -> "#0$hex"
-                4 -> "#00$hex"
-                3 -> "#000$hex"
-                else -> "#$hex"
-            }
-        }.toUpperCase()
+    "#${alpha.toStringColorComponent()}${red.toStringColorComponent()}${green.toStringColorComponent()}${blue.toStringColorComponent()}".toUpperCase()
 
-@ExperimentalUnsignedTypes
 fun Int.toRgbString(): String =
-    this.withAlpha(0)
-        .toUInt()
-        .toString(16)
-        .let { hex ->
-            when (hex.length) {
-                5 -> "#0$hex"
-                4 -> "#00$hex"
-                3 -> "#000$hex"
-                else -> "#$hex"
-            }
-        }.toUpperCase()
+    "#${red.toStringColorComponent()}${green.toStringColorComponent()}${blue.toStringColorComponent()}".toUpperCase()

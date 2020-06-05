@@ -158,4 +158,32 @@ class ColorExtTest {
         assertEquals(0xAB00FF00.toInt(), 0xFF00FF00.toInt().withAlpha(0xAB))
         assertEquals(0xCD12FF25.toInt(), 0x2412FF25.toInt().withAlpha(0xCD))
     }
+
+    @Test
+    fun toArgbStringTest() {
+        assertEquals("#AB00FF00", 0xAB00FF00.toInt().toArgbString())
+        assertEquals("#FF01FF94", 0xFF01FF94.toInt().toArgbString())
+        assertEquals("#1201FF00", 0x1201FF00.toInt().toArgbString())
+        assertEquals("#0001FF00", 0x0001FF00.toInt().toArgbString())
+        assertEquals("#0000FF00", 0x0000FF00.toInt().toArgbString())
+        assertEquals("#FF000000", 0xFF000000.toInt().toArgbString())
+        assertEquals("#FF000001", 0xFF000001.toInt().toArgbString())
+        assertEquals("#00000001", 0x00000001.toInt().toArgbString())
+        assertEquals("#00000000", 0.toArgbString())
+        assertEquals("#00100010", 0x00100010.toArgbString())
+    }
+
+    @Test
+    fun toRgbStringTest() {
+        assertEquals("#00FF00", 0xAB00FF00.toInt().toRgbString())
+        assertEquals("#01FF94", 0xFF01FF94.toInt().toRgbString())
+        assertEquals("#01FF00", 0x1201FF00.toInt().toRgbString())
+        assertEquals("#01FF00", 0x0001FF00.toInt().toRgbString())
+        assertEquals("#00FF00", 0x0000FF00.toInt().toRgbString())
+        assertEquals("#000000", 0xFF000000.toInt().toRgbString())
+        assertEquals("#000001", 0xFF000001.toInt().toRgbString())
+        assertEquals("#000001", 0x00000001.toInt().toRgbString())
+        assertEquals("#000000", 0.toRgbString())
+        assertEquals("#100010", 0x00100010.toRgbString())
+    }
 }
