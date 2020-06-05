@@ -82,6 +82,28 @@ class TextExtTest {
     }
 
     @Test
+    fun string_equalsIgnoreCase_nullAndEmptyCases() {
+        assertEquals(true, null.equalsNullable(null, true))
+        assertEquals(true, null.equalsNullable(null, false))
+        assertEquals(true, "".equalsNullable("", true))
+        assertEquals(true, "".equalsNullable("", false))
+        assertEquals(true, null.equalsNullable("", true))
+        assertEquals(true, null.equalsNullable("", false))
+        assertEquals(true, "".equalsNullable(null, true))
+        assertEquals(true, "".equalsNullable(null, false))
+    }
+
+    @Test
+    fun string_equalsIgnoreCase_sameStringCases() {
+        assertEquals(true, "Kiev".equalsNullable("kIEv", true))
+        assertEquals(false, "Kiev".equalsNullable("kIEv", false))
+        assertEquals(true, "Kiev".equalsNullable("Kiev", true))
+        assertEquals(true, "Kiev".equalsNullable("Kiev", false))
+        assertEquals(true, "kiev".equalsNullable("kiev", true))
+        assertEquals(true, "kiev".equalsNullable("kiev", false))
+    }
+
+    @Test
     fun equalsNullable_ignoreCaseFalse() {
         assertFalse(
             "New".equalsNullable("new", ignoreCase = false)
