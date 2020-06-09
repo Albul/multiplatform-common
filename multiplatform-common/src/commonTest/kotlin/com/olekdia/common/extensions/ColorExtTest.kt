@@ -109,6 +109,20 @@ class ColorExtTest {
     }
 
     @Test
+    fun hsbTest() {
+        assertEquals(-9306241, hsb(125.9155F,0.5568628F,1.0F))
+        assertEquals(-11160833, hsb(207.17647F,0.6666667F,1.0F))
+        assertEquals(-43563, hsb(314.82352F,0.6666667F,1.0F))
+        assertEquals(0xffff55a1.toInt(), hsb(333.17648F,0.6666667F,1.0F))
+        assertEquals(0xffffc671.toInt(), hsb(35.915497F,0.5568628F,1.0F))
+        assertEquals(0xff8fbb3e.toInt(), hsb(81.119995F,0.6684492F,0.73333335F))
+        assertEquals(0xff68aebb.toInt(), hsb(189.39758F,0.44385028F,0.73333335F))
+        assertEquals(0xff712775.toInt(), hsb(297.12F,0.6684492F,0.4575261F))
+        assertEquals(0xff000000.toInt(), hsb(297.12F,0.6684492F,0.0F))
+        assertEquals(0xff000000.toInt(), hsb(450.12F,0.6684492F,0.0F))
+    }
+
+    @Test
     fun getRandomColorTest() {
         val set = mutableSetOf<Int>()
 

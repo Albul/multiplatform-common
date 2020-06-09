@@ -3,11 +3,13 @@ package com.olekdia.common.extensions
 
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmOverloads
+import kotlin.math.abs
 import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 import kotlin.random.Random
+
 
 const val COLOR_ALPHA_MASK = 0x00FFFFFF
 const val MAX_COLOR_COMPONENT: Int = 0xFF
@@ -187,8 +189,9 @@ fun hsb(hue: Float, saturation: Float, brightness: Float): Int {
         g = b
         r = g
     } else {
-        val h = (hue - floor(hue.toDouble()).toFloat()) * 6.0F
-        val f = h - floor(g.toDouble()).toFloat()
+        val hue01 = hue / 360F
+        val h = (hue01 - floor(hue01)) * 6.0F
+        val f = h - floor(h)
         val p = brightness * (1.0F - saturation)
         val q = brightness * (1.0F - saturation * f)
         val t = brightness * (1.0F - saturation * (1.0F - f))
@@ -225,6 +228,10 @@ fun hsb(hue: Float, saturation: Float, brightness: Float): Int {
             }
         }
     }
+
+    r = max(min(r, MAX_COLOR_COMPONENT), 0)
+    g = max(min(g, MAX_COLOR_COMPONENT), 0)
+    b = max(min(b, MAX_COLOR_COMPONENT), 0)
 
     return rgb(r, g, b)
 }
