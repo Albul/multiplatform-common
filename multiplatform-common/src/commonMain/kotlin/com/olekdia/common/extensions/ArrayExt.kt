@@ -8,7 +8,7 @@ import kotlin.jvm.JvmName
 //  sumBy
 //--------------------------------------------------------------------------------------------------
 
-public inline fun <T> Iterable<T>.sumBy(selector: (T) -> Long): Long {
+inline fun <T> Iterable<T>.sumBy(selector: (T) -> Long): Long {
     var sum: Long = 0L
     for (element in this) {
         sum += selector(element)
