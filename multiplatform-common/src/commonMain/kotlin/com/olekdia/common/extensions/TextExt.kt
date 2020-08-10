@@ -1,6 +1,7 @@
 package com.olekdia.common.extensions
 
 import com.olekdia.common.*
+import com.olekdia.common.misc.Path
 import kotlin.jvm.JvmOverloads
 
 inline fun StringBuilder.reuse(block: (StringBuilder) -> CharSequence): CharSequence {
@@ -88,3 +89,5 @@ fun String?.trimBidi(replaceWith: String = ""): String = this
             .trim { it <= ' ' }
     }
     ?: ""
+
+fun String.toPath(): Path = Path(this)
