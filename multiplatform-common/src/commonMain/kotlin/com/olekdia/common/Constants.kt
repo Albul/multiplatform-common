@@ -31,6 +31,9 @@ const val UTF_8 = "UTF-8"
 
 //--------------- Math
 
+const val ZERO_DIGIT = '0'
+const val NINE_DIGIT = '9'
+
 /**
  * 2*PI in degrees
  */
