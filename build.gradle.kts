@@ -8,7 +8,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0-rc")
         classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4")
     }
 }

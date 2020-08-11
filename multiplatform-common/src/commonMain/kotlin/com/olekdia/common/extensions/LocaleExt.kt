@@ -32,24 +32,29 @@ private fun getDigits(numSystem: Int): CharArray =
     }
 
 /**
- * Converts only to western arabic
+ * Converts digits from specified numSystem, to iso (western arabic)
  */
-@ExperimentalStdlibApi
-private fun StringBuilder.toIsoNumerals(numSystem: Int) {
+fun StringBuilder.toIsoNumerals(numSystem: Int): StringBuilder {
     val count = this.length
-    if (count == 0 || numSystem == WESTERN_ARABIC) return
+    if (count == 0 || numSystem == WESTERN_ARABIC) return this
     val digits = getDigits(numSystem)
+    val westernDigits = DIGITS_WESTERN_ARABIC
 
     var currChar: Char
     for (i in 0 until count) {
         currChar = this[i]
 
         if (currChar >= digits[0] && currChar <= digits[9]) {
-            this.set(i, Character.forDigit(currChar - digits[0], 10))
+            this[i] = westernDigits[currChar - digits[0]]
         }
     }
+
+    return this
 }
 
+/**
+ * Converts digits from specified numSystem, to iso (western arabic)
+ */
 fun CharSequence.toIsoNumerals(numSystem: Int): CharSequence =
     if (numSystem == WESTERN_ARABIC) {
         this
@@ -62,9 +67,22 @@ fun CharSequence.toIsoNumerals(numSystem: Int): CharSequence =
     }
 
 /**
- * Converts only from western arabic
+ * Converts digits from specified numSystem, to iso (western arabic)
  */
-@ExperimentalStdlibApi
+fun String.toIsoNumerals(numSystem: Int): String =
+    if (numSystem == WESTERN_ARABIC) {
+        this
+    } else {
+        builder
+            .clear()
+            .append(this)
+            .toIsoNumerals(numSystem)
+            .toString()
+    }
+
+/**
+ * Converts digits from western arabic, to specified numSystem
+ */
 fun StringBuilder.toLocalNumerals(numSystem: Int): StringBuilder {
     val count = this.length
     if (count == 0 || numSystem == WESTERN_ARABIC) return this
@@ -82,6 +100,9 @@ fun StringBuilder.toLocalNumerals(numSystem: Int): StringBuilder {
     return this
 }
 
+/**
+ * Converts digits from western arabic, to specified numSystem
+ */
 fun String.toLocalNumerals(numSystem: Int): String =
     if (numSystem == WESTERN_ARABIC) {
         this
@@ -93,6 +114,9 @@ fun String.toLocalNumerals(numSystem: Int): String =
             .toString()
     }
 
+/**
+ * Converts digits from western arabic, to specified numSystem
+ */
 fun CharSequence.toLocalNumerals(numSystem: Int): CharSequence =
     if (numSystem == WESTERN_ARABIC) {
         this
@@ -103,7 +127,23 @@ fun CharSequence.toLocalNumerals(numSystem: Int): CharSequence =
             .toLocalNumerals(numSystem)
     }
 
+/**
+ * Converts digits from western arabic, to specified numSystem
+ */
 fun Array<CharSequence>.toLocalNumerals(numSystem: Int): Array<CharSequence> =
+    if (numSystem == WESTERN_ARABIC) {
+        this
+    } else {
+        for (i in this.indices) {
+            this[i] = this[i].toLocalNumerals(numSystem)
+        }
+        this
+    }
+
+/**
+ * Converts digits from western arabic, to specified numSystem
+ */
+fun Array<String>.toLocalNumerals(numSystem: Int): Array<String> =
     if (numSystem == WESTERN_ARABIC) {
         this
     } else {
