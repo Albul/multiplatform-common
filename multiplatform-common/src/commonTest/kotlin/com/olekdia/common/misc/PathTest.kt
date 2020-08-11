@@ -22,6 +22,14 @@ class PathTest {
             "file://home/lib//",
             Path("file://home/lib//").path
         )
+        assertEquals(
+            "",
+            Path("some.txt").path
+        )
+        assertEquals(
+            "/",
+            Path("/some.txt").path
+        )
     }
 
     @Test
@@ -41,6 +49,18 @@ class PathTest {
         assertEquals(
             "file://home/lib//",
             Path("file://home/lib//").pathName
+        )
+        assertEquals(
+            "/main",
+            Path("/main.html").pathName
+        )
+        assertEquals(
+            "",
+            Path(".html").pathName
+        )
+        assertEquals(
+            "/",
+            Path("/.html").pathName
         )
     }
 
@@ -65,6 +85,10 @@ class PathTest {
         assertEquals(
             "no.tar.gz",
             Path("file://home/lib/no.tar.gz").nameExtension
+        )
+        assertEquals(
+            "file.tar.gz",
+            Path("/file.tar.gz").nameExtension
         )
     }
 
@@ -225,6 +249,10 @@ class PathTest {
         assertEquals(
             "/usr/lib/apache/no.tar.gz",
             Path("file://home/lib/no.tar.gz").withPath("/usr/lib/apache/").fullPath
+        )
+        assertEquals(
+            "/usr/lib/apache/no.tar.gz",
+            Path("no.tar.gz").withPath("/usr/lib/apache/").fullPath
         )
     }
 

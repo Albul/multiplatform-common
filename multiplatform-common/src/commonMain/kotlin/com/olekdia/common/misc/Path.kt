@@ -6,12 +6,12 @@ class Path(val fullPath: String) {
 
     val path: String
         get() = fullPath.lastIndexOf('/').let { index ->
-            if (index > 0) fullPath.substring(0, index + 1) else fullPath
+            if (index >= 0) fullPath.substring(0, index + 1) else ""
         }
 
     val pathName: String
         get() = fullPath.lastIndexOf('.').let { index ->
-            if (index > 0) fullPath.substring(0, index) else fullPath
+            if (index >= 0) fullPath.substring(0, index) else fullPath
         }
 
     val pathNameExtension: String
@@ -26,7 +26,7 @@ class Path(val fullPath: String) {
 
     val nameExtension: String
         get() = fullPath.lastIndexOf('/').let { index ->
-            if (index > 0) fullPath.substring(index + 1) else fullPath
+            if (index >= 0) fullPath.substring(index + 1) else fullPath
         }
 
     val extension: String
