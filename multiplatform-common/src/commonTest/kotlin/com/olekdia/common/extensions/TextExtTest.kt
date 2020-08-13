@@ -544,4 +544,31 @@ class TextExtTest {
         assertEquals(2, "1読\n".countPrintable())
         assertEquals(11, "У попа була\n\u0085\u200E".countPrintable())
     }
+
+    // https://www.loginradius.com/engineering/blog/eol-end-of-line-or-newline-characters/#:~:text=This%20character%20is%20commonly%20known,known%20as%20'Carriage%20Return'.
+    @Test
+    fun countLines() {
+        assertEquals(0, "".countLines())
+        assertEquals(0, null.countLines())
+        assertEquals(1, "12".countLines())
+        assertEquals(1, "Bla bla bla bla".countLines())
+
+        assertEquals(3, "Bla\n32\nBla".countLines())
+        assertEquals(9, "Bla\n32\nBla\n\n\n\n\n\n".countLines())
+        assertEquals(2, "Bla\n".countLines())
+        assertEquals(2, "Bla\nBla".countLines())
+        assertEquals(2, "\nBlaBla".countLines())
+
+        assertEquals(3, "Bla\r32\rBla".countLines())
+        assertEquals(9, "Bla\r32\rBla\r\r\r\r\r\r".countLines())
+        assertEquals(2, "Bla\r".countLines())
+        assertEquals(2, "Bla\rBla".countLines())
+        assertEquals(2, "\rBlaBla".countLines())
+
+        assertEquals(3, "Bla\r\n32\r\nBla".countLines())
+        assertEquals(9, "Bla\r\n32\r\nBla\r\n\r\n\r\n\r\n\r\n\r\n".countLines())
+        assertEquals(2, "Bla\r\n".countLines())
+        assertEquals(2, "Bla\r\nBla".countLines())
+        assertEquals(2, "\r\nBlaBla".countLines())
+    }
 }

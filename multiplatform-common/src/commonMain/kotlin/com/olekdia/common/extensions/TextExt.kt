@@ -182,6 +182,31 @@ fun String.toSingleLine(joiner: String): String = this.replace("[\\t\\n\\r]+".to
 fun CharSequence?.countPrintable(): Int =
     this?.count { it.isPrintable() } ?: 0
 
+fun CharSequence?.countLines(): Int {
+    if (this == null || this.isEmpty()) return 0
+
+    val length = this.length
+    var lines: Int = 1
+    var i = 0
+    while (i < length) {
+        val ch = this[i]
+        if (ch == '\r') {
+            lines++
+            (i + 1).let { j ->
+                if (j < length
+                    && this[j] == '\n'
+                ) {
+                    i++
+                }
+            }
+        } else if (ch == '\n') {
+            lines++
+        }
+        i++
+    }
+    return lines
+}
+
 //--------------------------------------------------------------------------------------------------
 //  Char
 //--------------------------------------------------------------------------------------------------
