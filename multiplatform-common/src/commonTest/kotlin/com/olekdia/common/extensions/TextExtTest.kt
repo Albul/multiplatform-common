@@ -34,6 +34,35 @@ class TextExtTest {
     }
 
     @Test
+    fun removeLast() {
+        val b = StringBuilder()
+        b.append("New!")
+            .removeLast()
+            .append('.')
+
+        assertEquals("New.", b.toString())
+
+        b.removeLast()
+        assertEquals("New", b.toString())
+
+
+        b.removeLast()
+        assertEquals("Ne", b.toString())
+
+        b.removeLast()
+        assertEquals("N", b.toString())
+
+        b.removeLast()
+        assertEquals("", b.toString())
+
+        b.removeLast()
+        assertEquals("", b.toString())
+
+        b.removeLast()
+        assertEquals("", b.toString())
+    }
+
+    @Test
     fun reuse() {
         val b = StringBuilder()
         b.append("New")

@@ -20,6 +20,18 @@ fun StringBuilder.appendSpaces(numSpaces: Int): StringBuilder =
     }
 
 /**
+ * Remove last character of StringBuilder
+ */
+fun StringBuilder.removeLast(): StringBuilder =
+    this.apply {
+        this.length.let {
+            if (it > 0) {
+                this.setLength(it - 1)
+            }
+        }
+    }
+
+/**
  * null equals empty string
  */
 fun String?.equalsNullable(other: String?, ignoreCase: Boolean = false): Boolean =
@@ -73,6 +85,9 @@ fun String?.compareToNullable(other: String?, ignoreCase: Boolean = false): Int 
         this.compareTo(other, ignoreCase)
     }
 
+/**
+ * Replace all Unicode Bidirectional characters by specified string
+ */
 @JvmOverloads
 fun String?.trimBidi(replaceWith: String = ""): String = this
     ?.let {
