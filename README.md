@@ -15,16 +15,16 @@ To use in multiplatform project add:
 ```gradle
 dependencies {
   ...
-  implementation("com.olekdia:multiplatform-common:0.3.0")
+  implementation("com.olekdia:multiplatform-common:0.5.1")
 }
 ```
 
 To use in platform specific projects include one of the following:
 ```gradle
 dependencies {
-  implementation("com.olekdia:multiplatform-common-jvm:0.3.0")
-  implementation("com.olekdia:multiplatform-common-js:0.3.0")
-  implementation("com.olekdia:multiplatform-common-native:0.3.0")
+  implementation("com.olekdia:multiplatform-common-jvm:0.5.1")
+  implementation("com.olekdia:multiplatform-common-js:0.5.1")
+  implementation("com.olekdia:multiplatform-common-native:0.5.1")
 }
 ```
 
