@@ -82,6 +82,25 @@ fun Iterable<*>.joinToString(joiner: Char = ','): String {
     return b.toString()
 }
 
+fun String.toSet(delimiter: String = ",", trimWhitespaces: Boolean = true): MutableSet<String> {
+    val set = HashSet<String>()
+    if (this.isNotEmpty()) {
+        this.split(delimiter)
+            .forEach { item ->
+                if (trimWhitespaces) {
+                    item.trim { it.isWhitespace() }
+                } else {
+                    item
+                }.let {
+                    if (it.isNotEmpty()) {
+                        set.add(it)
+                    }
+                }
+            }
+    }
+    return set
+}
+
 /**
  * null equals empty string
  */

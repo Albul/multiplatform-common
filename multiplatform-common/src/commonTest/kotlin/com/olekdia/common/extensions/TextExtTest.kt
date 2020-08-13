@@ -131,6 +131,77 @@ class TextExtTest {
     }
 
     @Test
+    fun toSet() {
+        assertTrue(
+            setOf<String>(
+                "1", "2", "3", "4", "5",
+            ).contentEquals(
+                "1,2,3,4,5".toSet(",")
+            )
+        )
+
+        assertTrue(
+            setOf<String>(
+                "a", "b", "c", "d"
+            ).contentEquals(
+                "a b c d".toSet(" ")
+            )
+        )
+        assertTrue(
+            setOf<String>(
+                "abd", "cde", "fgh"
+            ).contentEquals(
+                "abd-*|*-cde-*|*-fgh".toSet("-*|*-")
+            )
+        )
+        assertTrue(
+            setOf<String>().contentEquals(
+                "   ".toSet(" ")
+            )
+        )
+        assertTrue(
+            setOf<String>().contentEquals(
+                " , ,  ,    ,".toSet()
+            )
+        )
+        assertTrue(
+            setOf<String>(" ", "  ", "    ").contentEquals(
+                " ,  ,    ,".toSet(delimiter = ",", trimWhitespaces = false)
+            )
+        )
+        assertTrue(
+            setOf<String>("a", "b", "c").contentEquals(
+                "a  b  c   ".toSet(" ")
+            )
+        )
+        assertTrue(
+            setOf<String>("a", "b", "c").contentEquals(
+                "a b a a a c c    ".toSet(" ")
+            )
+        )
+        assertTrue(
+            setOf<String>().contentEquals(
+                "".toSet(" ")
+            )
+        )
+        assertTrue(
+            setOf<String>().contentEquals(
+                "".toSet("|")
+            )
+        )
+        assertTrue(
+            setOf<String>().contentEquals(
+                "".toSet("")
+            )
+        )
+        assertTrue(
+            setOf<String>("a", "b", "c").contentEquals(
+                "abc".toSet("")
+            )
+        )
+    }
+
+    @Test
     fun equalsNullable() {
         assertTrue(
             "New".equalsNullable("new", ignoreCase = true)

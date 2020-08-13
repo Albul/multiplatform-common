@@ -1,7 +1,10 @@
 package com.olekdia.common.extensions
 
 import com.olekdia.common.INVALID
-import kotlin.test.*
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class ArrayExtTest {
 
@@ -19,29 +22,6 @@ class ArrayExtTest {
         byteArray = byteArrayOf(1, 3, 5, 7, 12, 25, 100)
         stringArray = arrayOf("1", "three", "5", "seven", "12", "twenty five", "100")
     }
-
-//--------------------------------------------------------------------------------------------------
-//  sumBy
-//--------------------------------------------------------------------------------------------------
-
-    class Entry(val value: Long)
-
-    @Test
-    fun symBy_longList_returnCorrectResult() {
-        assertEquals(
-            22L, listOf<Long>(3L, 8L, -2L, 14L, -1L).sumBy { it }
-        )
-    }
-
-    @Test
-    fun symBy_entryList_returnCorrectResult() {
-        assertEquals(
-            28L,
-            listOf<Entry>(Entry(-2L), Entry(15L), Entry(4L), Entry(11L))
-                .sumBy { it.value }
-        )
-    }
-
 
 //--------------------------------------------------------------------------------------------------
 //  binarySearch
