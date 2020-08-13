@@ -111,6 +111,26 @@ class TextExtTest {
     }
 
     @Test
+    fun toInt() {
+        assertEquals(1, "1".toInt10Radix())
+        assertEquals(-1, "-1".toInt10Radix())
+        assertEquals(1, "+1".toInt10Radix())
+        assertEquals(1123, "+1123".toInt10Radix())
+        assertEquals(0, "+0".toInt10Radix())
+        assertEquals(0, "-0".toInt10Radix())
+        assertEquals(0, "0".toInt10Radix())
+        assertEquals(2595, "2595".toInt10Radix())
+        assertEquals(-2595, "-2595".toInt10Radix())
+        assertEquals(2595, "+2595".toInt10Radix())
+        assertEquals(Int.MAX_VALUE, "2147483647".toInt10Radix())
+        assertEquals(Int.MIN_VALUE, "-2147483648".toInt10Radix())
+        assertEquals(0, "-21474-83648".toInt10Radix())
+        assertEquals(0, "-21474A83648".toInt10Radix())
+        assertEquals(0, "-2147D".toInt10Radix())
+        assertEquals(0, "$".toInt10Radix())
+    }
+
+    @Test
     fun equalsNullable() {
         assertTrue(
             "New".equalsNullable("new", ignoreCase = true)

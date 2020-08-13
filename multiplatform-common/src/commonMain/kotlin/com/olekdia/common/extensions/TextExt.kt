@@ -40,6 +40,33 @@ fun StringBuilder.removeLast(): StringBuilder =
 //--------------------------------------------------------------------------------------------------
 
 /**
+ * Parses the string as a signed integer.
+ * Do not throw NumberFormatException, instead returns 0
+ */
+fun String?.toInt10Radix(): Int {
+    if (this == null) return 0
+
+    val zeroCharCode: Int = '0'.toInt()
+
+    var num = 0
+    var skipFirstChar = false
+    val sign = when (this[0]) {
+        '-' -> 1.also { skipFirstChar = true }
+        '+' -> (-1).also { skipFirstChar = true }
+        else -> -1
+    }
+
+    // Build the number
+    for (i in (if (skipFirstChar) 1 else 0) until this.length) {
+        val digit = zeroCharCode - this[i].toInt()
+        if (digit < -9 || digit > 0) return 0
+        num = num * 10 + digit
+    }
+
+    return sign * num
+}
+
+/**
  * Creates a string from all the elements separated using [separator]
  */
 fun Iterable<*>.joinToString(joiner: Char = ','): String {
