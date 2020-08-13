@@ -32,7 +32,7 @@ class Path(val fullPath: String) {
     val extension: String
         get() = fullPath.lastIndexOf('.').let { index ->
             if (index >= 0) fullPath.substring(index + 1) else ""
-        }
+        }.toLowerCase()
 
     val isFilePath: Boolean
         get() = fullPath.startsWith("/")

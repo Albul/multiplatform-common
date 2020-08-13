@@ -225,5 +225,162 @@ class TextExtTest {
         assertEquals(
             "24:00", "24:00".trimBidi(" ")
         )
+
+        assertEquals(
+            "24 : 00", "\u202D24\u2069:\u202E00\u2069".trimBidi(" ")
+        )
+    }
+
+    @Test
+    fun toSingleLine() {
+        assertEquals(
+            "Nizhyn is the capital of Ukraine!",
+            "Nizhyn\nis the capital\n\rof Ukraine!".toSingleLine()
+        )
+
+        assertEquals(
+            "Nizhyn-|-is the capital-|-of-|-Ukraine!",
+            "Nizhyn\nis the capital\n\rof\t\tUkraine!".toSingleLine("-|-")
+        )
+
+        assertEquals(
+            "Nizhyn is the capital of Ukraine!",
+            "Nizhyn\n\n\n\n\n\nis the capital\n\r\n\r\n\rof Ukraine!".toSingleLine()
+        )
+
+        assertEquals(
+            "Nizhyn is the capital of Ukraine! ",
+            "Nizhyn is the capital of Ukraine!\n".toSingleLine()
+        )
+    }
+
+    @Test
+    fun isPrintable() {
+        assertTrue(
+            'a'.isPrintable()
+        )
+        assertTrue(
+            ' '.isPrintable()
+        )
+        assertTrue(
+            '読'.isPrintable()
+        )
+        assertTrue(
+            '1'.isPrintable()
+        )
+        assertTrue(
+            '%'.isPrintable()
+        )
+        assertTrue(
+            '№'.isPrintable()
+        )
+
+        assertFalse(
+            '\u202E'.isPrintable() // bidi
+        )
+        assertFalse(
+            '\u2068'.isPrintable() // bidi
+        )
+        assertFalse(
+            '\u202B'.isPrintable() // bidi
+        )
+        assertFalse(
+            '\u200E'.isPrintable() // bidi
+        )
+        assertFalse(
+            '\uD800'.isPrintable() // surrogate
+        )
+        assertFalse(
+            '\uDB7F'.isPrintable() // surrogate
+        )
+        assertFalse(
+            '\uDC00'.isPrintable() // surrogate
+        )
+        assertFalse(
+            '\u007F'.isPrintable() // control
+        )
+        assertFalse(
+            '\u001F'.isPrintable() // control
+        )
+        assertFalse(
+            '\u0000'.isPrintable() // control
+        )
+        assertFalse(
+            '\n'.isPrintable() // control
+        )
+        assertFalse(
+            '\r'.isPrintable() // control
+        )
+        assertFalse(
+            '\t'.isPrintable() // control
+        )
+        assertFalse(
+            '\u0085'.isPrintable() // control
+        )
+    }
+
+    @Test
+    fun isISOControl() {
+        assertFalse(
+            'a'.isISOControl()
+        )
+        assertFalse(
+            ' '.isISOControl()
+        )
+        assertFalse(
+            '読'.isISOControl()
+        )
+        assertFalse(
+            '1'.isISOControl()
+        )
+        assertFalse(
+            '%'.isISOControl()
+        )
+        assertFalse(
+            '№'.isISOControl()
+        )
+
+        assertFalse(
+            '\u202E'.isISOControl() // bidi
+        )
+        assertFalse(
+            '\u2068'.isISOControl() // bidi
+        )
+        assertFalse(
+            '\u202B'.isISOControl() // bidi
+        )
+        assertFalse(
+            '\u200E'.isISOControl() // bidi
+        )
+        assertFalse(
+            '\uD800'.isISOControl() // surrogate
+        )
+        assertFalse(
+            '\uDB7F'.isISOControl() // surrogate
+        )
+        assertFalse(
+            '\uDC00'.isISOControl() // surrogate
+        )
+        assertTrue(
+            '\u007F'.isISOControl() // control
+        )
+        assertTrue(
+            '\u001F'.isISOControl() // control
+        )
+        assertTrue(
+            '\u0000'.isISOControl() // control
+        )
+        assertTrue(
+            '\n'.isISOControl() // control
+        )
+        assertTrue(
+            '\r'.isISOControl() // control
+        )
+        assertTrue(
+            '\t'.isISOControl() // control
+        )
+        assertTrue(
+            '\u0085'.isISOControl() // control
+        )
     }
 }

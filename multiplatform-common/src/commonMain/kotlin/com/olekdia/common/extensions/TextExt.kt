@@ -77,17 +77,65 @@ fun String?.compareToNullable(other: String?, ignoreCase: Boolean = false): Int 
 fun String?.trimBidi(replaceWith: String = ""): String = this
     ?.let {
         it
-            .replace(LRE.toString(), replaceWith)
-            .replace(RLE.toString(), replaceWith)
-            .replace(PDF.toString(), replaceWith)
-            .replace(PDI.toString(), replaceWith)
-            .replace(LRM.toString(), replaceWith)
-            .replace(RLM.toString(), replaceWith)
-            .replace(LRI.toString(), replaceWith)
-            .replace(RLI.toString(), replaceWith)
-            .replace(FSI.toString(), replaceWith)
+            .replace("[\\u2066\\u2067\\u2068\\u202A\\u202B\\u202D\\u202E\\u202C\\u2069\\u200E\\u200F]".toRegex(), replaceWith)
             .trim { it <= ' ' }
     }
     ?: ""
 
 fun String.toPath(): Path = Path(this)
+
+/**
+ * Convert multiline string to single line string by replacing line-brakes by space
+ */
+fun String.toSingleLine(): String = toSingleLine(" ")
+
+/**
+ * Convert multiline string to single line string by replacing line-brakes by joiner
+ */
+fun String.toSingleLine(joiner: String): String = this.replace("[\\t\\n\\r]+".toRegex(), joiner)
+
+/**
+ * Determines if the specified character is printable.
+ */
+fun Char.isPrintable(): Boolean =
+    !Char.isISOControl(this)
+            && !this.isHighSurrogate()
+            && !this.isLowSurrogate()
+            && this != LRE
+            && this != RLE
+            && this != PDF
+            && this != LRI
+            && this != RLI
+            && this != PDI
+            && this != FSI
+            && this != LRM
+            && this != RLM
+            && this != LRO
+            && this != RLO
+
+/**
+ * Determines if the specified character is an ISO control
+ * character.
+ */
+fun Char.isISOControl(): Boolean =
+    Char.isISOControl(this)
+
+/**
+ * Determines if the specified character is an ISO control
+ * character.  A character is considered to be an ISO control
+ * character if its code is in the range `'\u005Cu0000'`
+ * through '\u005Cu001F' or in the range
+ */
+fun Char.Companion.isISOControl(ch: Char): Boolean =
+    Char.isISOControl(ch.toInt())
+
+/**
+ * Determines if the referenced character (Unicode code point) is an ISO control
+ * character.  A character is considered to be an ISO control
+ * character if its code is in the range `'\u005Cu0000'`
+ * through `'\u005Cu001F'` or in the range
+ * `'\u005Cu007F'` through `'\u005Cu009F'`.
+ */
+fun Char.Companion.isISOControl(codePoint: Int): Boolean =
+    codePoint <= 0x9F &&
+        (codePoint >= 0x7F || codePoint ushr 5 == 0)
