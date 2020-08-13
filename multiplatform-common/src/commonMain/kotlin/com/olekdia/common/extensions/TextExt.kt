@@ -3,6 +3,7 @@ package com.olekdia.common.extensions
 import com.olekdia.common.*
 import com.olekdia.common.misc.Path
 import kotlin.jvm.JvmOverloads
+import kotlin.math.max
 
 //--------------------------------------------------------------------------------------------------
 //  StringBuilder
@@ -99,6 +100,24 @@ fun String.toSet(delimiter: String = ",", trimWhitespaces: Boolean = true): Muta
             }
     }
     return set
+}
+
+@JvmOverloads
+fun String.ellipsize(
+    size: Int,
+    ending: Char? = '…'
+): String = if (this.isEmpty() || size <= 0) {
+    ""
+} else if (length <= size) {
+    this
+} else {
+    this.substring(0, max(size - 1, 0)).let {
+        if (ending == null) {
+            it
+        } else {
+            it + ending
+        }
+    }
 }
 
 /**
