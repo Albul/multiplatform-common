@@ -383,4 +383,14 @@ class TextExtTest {
             '\u0085'.isISOControl() // control
         )
     }
+
+    @Test
+    fun countPrintable() {
+        assertEquals(3, "fda".countPrintable())
+        assertEquals(0, "".countPrintable())
+        assertEquals(0, null.countPrintable())
+        assertEquals(1, " ".countPrintable())
+        assertEquals(2, "1読\n".countPrintable())
+        assertEquals(11, "У попа була\n\u0085\u200E".countPrintable())
+    }
 }

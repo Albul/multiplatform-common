@@ -94,6 +94,9 @@ fun String.toSingleLine(): String = toSingleLine(" ")
  */
 fun String.toSingleLine(joiner: String): String = this.replace("[\\t\\n\\r]+".toRegex(), joiner)
 
+fun CharSequence?.countPrintable(): Int =
+    this?.count { it.isPrintable() } ?: 0
+
 /**
  * Determines if the specified character is printable.
  */
