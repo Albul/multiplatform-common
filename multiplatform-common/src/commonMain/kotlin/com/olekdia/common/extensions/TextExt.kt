@@ -1,7 +1,9 @@
+@file:JvmName("TextExt")
 package com.olekdia.common.extensions
 
 import com.olekdia.common.*
 import com.olekdia.common.misc.Path
+import kotlin.jvm.JvmName
 import kotlin.jvm.JvmOverloads
 import kotlin.math.max
 
