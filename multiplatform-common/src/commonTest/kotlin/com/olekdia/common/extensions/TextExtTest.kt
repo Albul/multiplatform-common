@@ -80,6 +80,37 @@ class TextExtTest {
     }
 
     @Test
+    fun joinToString() {
+        assertEquals(
+            "1,2,3,4,5",
+            listOf<String>(
+                "1", "2", "3", "4", "5"
+            ).joinToString(',')
+        )
+
+        assertEquals(
+            "a:b:c:d:e",
+            listOf<String>(
+                "a", "b", "c", "d", "e"
+            ).joinToString(':')
+        )
+
+        assertEquals(
+            "123 456 789",
+            listOf<String>(
+                "123", "456", "789"
+            ).joinToString(' ')
+        )
+
+        assertEquals(
+            "  ",
+            listOf<String>(
+                "", "", ""
+            ).joinToString(' ')
+        )
+    }
+
+    @Test
     fun equalsNullable() {
         assertTrue(
             "New".equalsNullable("new", ignoreCase = true)

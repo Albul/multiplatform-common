@@ -4,6 +4,10 @@ import com.olekdia.common.*
 import com.olekdia.common.misc.Path
 import kotlin.jvm.JvmOverloads
 
+//--------------------------------------------------------------------------------------------------
+//  StringBuilder
+//--------------------------------------------------------------------------------------------------
+
 inline fun StringBuilder.reuse(block: (StringBuilder) -> CharSequence): CharSequence {
     this.clear()
     return block(this)
@@ -30,6 +34,26 @@ fun StringBuilder.removeLast(): StringBuilder =
             }
         }
     }
+
+//--------------------------------------------------------------------------------------------------
+//  String
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * Creates a string from all the elements separated using [separator]
+ */
+fun Iterable<*>.joinToString(joiner: Char = ','): String {
+    val b = StringBuilder()
+    val it = this.iterator()
+    if (it.hasNext()) {
+        b.append(it.next())
+        while (it.hasNext()) {
+            b.append(joiner)
+            b.append(it.next())
+        }
+    }
+    return b.toString()
+}
 
 /**
  * null equals empty string
@@ -111,6 +135,10 @@ fun String.toSingleLine(joiner: String): String = this.replace("[\\t\\n\\r]+".to
 
 fun CharSequence?.countPrintable(): Int =
     this?.count { it.isPrintable() } ?: 0
+
+//--------------------------------------------------------------------------------------------------
+//  Char
+//--------------------------------------------------------------------------------------------------
 
 /**
  * Determines if the specified character is printable.
