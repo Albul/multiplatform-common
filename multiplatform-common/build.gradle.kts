@@ -9,8 +9,14 @@ kotlin {
         jvm()
         js() {
             browser()
+            nodejs()
         }
-        linuxX64("native")
+        linuxX64()
+        linuxArm64()
+        mingwX64()
+        macosX64()
+        iosArm64()
+        iosX64()
 
         val commonMain by getting {
             dependencies {
@@ -47,10 +53,30 @@ kotlin {
             }
         }
 
-        val nativeMain by getting {
+        val nativeMain by creating {
+            dependsOn(commonMain)
             dependencies {
                 implementation(kotlin("stdlib"))
             }
+        }
+
+        val linuxX64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val linuxArm64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val mingwX64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val macosX64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val iosArm64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val iosX64Main by getting {
+            dependsOn(nativeMain)
         }
     }
 }
