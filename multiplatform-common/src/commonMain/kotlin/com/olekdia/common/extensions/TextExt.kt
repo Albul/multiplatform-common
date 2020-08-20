@@ -46,7 +46,7 @@ fun StringBuilder.removeLast(): StringBuilder =
  * Parses the string as a signed integer.
  * Do not throw NumberFormatException, instead returns 0
  */
-fun String?.toInt10Radix(): Int {
+fun String?.toIntOrZero(): Int {
     if (this == null) return 0
 
     val zeroCharCode: Int = '0'.toInt()
