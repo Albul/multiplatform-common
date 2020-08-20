@@ -1,7 +1,5 @@
 plugins {
     id("kotlin-multiplatform")
-    id("maven-publish")
-    id("com.jfrog.bintray")
 }
 
 kotlin {
@@ -20,7 +18,6 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-common"))
             }
         }
         val commonTest by getting {
@@ -32,7 +29,6 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-js"))
             }
         }
         val jsTest by getting {
@@ -43,7 +39,6 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
             }
         }
         val jvmTest by getting {
@@ -56,7 +51,6 @@ kotlin {
         val nativeMain by creating {
             dependsOn(commonMain)
             dependencies {
-                implementation(kotlin("stdlib"))
             }
         }
 
@@ -81,4 +75,4 @@ kotlin {
     }
 }
 
-apply(from = "bintray.gradle")
+apply(from = "maven.publish.gradle.kts")
