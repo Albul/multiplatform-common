@@ -13,7 +13,7 @@ val bintrayApiKey = properties.getProperty("bintray.apikey")
 val bintrayPassword = properties.getProperty("bintray.gpg.password")
 val libraryVersion: String by project
 val publishedGroupId: String by project
-val artifact: String by project
+val artifactName: String by project
 val bintrayRepo: String by project
 val libraryName: String by project
 val bintrayName: String by project
@@ -44,7 +44,7 @@ configure<PublishingExtension> {
     publications {
         withType<MavenPublication> {
             groupId = publishedGroupId
-            artifactId = artifact
+            artifactId = artifactName
             version = libraryVersion
 
             pom {
@@ -78,7 +78,7 @@ configure<PublishingExtension> {
     }
 
     repositories {
-        maven("https://api.bintray.com/maven/${developerOrg}/${bintrayRepo}/${artifact}/;publish=1") {
+        maven("https://api.bintray.com/maven/${developerOrg}/${bintrayRepo}/${artifactName}/;publish=1") {
             credentials {
                 username = bintrayUser
                 password = bintrayApiKey
