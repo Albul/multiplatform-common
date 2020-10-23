@@ -2,6 +2,7 @@ package com.olekdia.common.extensions
 
 import com.olekdia.common.EQUALS
 import com.olekdia.common.FIRST_GREATER
+import com.olekdia.common.INVALID
 import com.olekdia.common.SECOND_GREATER
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -111,7 +112,7 @@ class TextExtTest {
     }
 
     @Test
-    fun toInt() {
+    fun toIntOrZero() {
         assertEquals(1, "1".toIntOrZero())
         assertEquals(-1, "-1".toIntOrZero())
         assertEquals(1, "+1".toIntOrZero())
@@ -128,6 +129,26 @@ class TextExtTest {
         assertEquals(0, "-21474A83648".toIntOrZero())
         assertEquals(0, "-2147D".toIntOrZero())
         assertEquals(0, "$".toIntOrZero())
+    }
+
+    @Test
+    fun toIntOr() {
+        assertEquals(1, "1".toIntOr(INVALID))
+        assertEquals(-1, "-1".toIntOr(INVALID))
+        assertEquals(1, "+1".toIntOr(INVALID))
+        assertEquals(1123, "+1123".toIntOr(INVALID))
+        assertEquals(0, "+0".toIntOr(INVALID))
+        assertEquals(0, "-0".toIntOr(INVALID))
+        assertEquals(0, "0".toIntOr(INVALID))
+        assertEquals(2595, "2595".toIntOr(INVALID))
+        assertEquals(-2595, "-2595".toIntOr(INVALID))
+        assertEquals(2595, "+2595".toIntOr(INVALID))
+        assertEquals(Int.MAX_VALUE, "2147483647".toIntOr(INVALID))
+        assertEquals(Int.MIN_VALUE, "-2147483648".toIntOr(INVALID))
+        assertEquals(INVALID, "-21474-83648".toIntOr(INVALID))
+        assertEquals(INVALID, "-21474A83648".toIntOr(INVALID))
+        assertEquals(INVALID, "-2147D".toIntOr(INVALID))
+        assertEquals(INVALID, "$".toIntOr(INVALID))
     }
 
     @Test

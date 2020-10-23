@@ -44,10 +44,10 @@ fun StringBuilder.removeLast(): StringBuilder =
 
 /**
  * Parses the string as a signed integer.
- * Do not throw NumberFormatException, instead returns 0
+ * Do not throw NumberFormatException, instead returns [fallbackValue]
  */
-fun String?.toIntOrZero(): Int {
-    if (this == null) return 0
+fun String?.toIntOr(fallbackValue: Int): Int {
+    if (this == null) return fallbackValue
 
     val zeroCharCode: Int = '0'.toInt()
 
@@ -62,12 +62,19 @@ fun String?.toIntOrZero(): Int {
     // Build the number
     for (i in (if (skipFirstChar) 1 else 0) until this.length) {
         val digit = zeroCharCode - this[i].toInt()
-        if (digit < -9 || digit > 0) return 0
+        if (digit < -9 || digit > 0) return fallbackValue
         num = num * 10 + digit
     }
 
     return sign * num
 }
+
+/**
+ * Parses the string as a signed integer.
+ * Do not throw NumberFormatException, instead returns 0
+ */
+fun String?.toIntOrZero(): Int =
+    this.toIntOr(fallbackValue = 0)
 
 /**
  * Creates a string from all the elements separated using [separator]
