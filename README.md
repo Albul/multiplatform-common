@@ -1,7 +1,7 @@
 # Multiplatform common
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
-[ ![Download](https://api.bintray.com/packages/olekdia/olekdia/multiplatform-common/images/download.svg?version=0.5.24) ](https://bintray.com/olekdia/olekdia/multiplatform-common/0.5.23/link)
+[ ![Download](https://api.bintray.com/packages/olekdia/olekdia/multiplatform-common/images/download.svg?version=0.5.25) ](https://bintray.com/olekdia/olekdia/multiplatform-common/0.5.25/link)
 
 ---
 
