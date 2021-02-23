@@ -5,6 +5,7 @@ import org.gradle.api.publish.PublishingExtension
 plugins {
     id("kotlin-multiplatform")
     id("org.jetbrains.dokka") version "1.4.0-rc"
+    id("io.codearte.nexus-staging") version "0.22.0"
     `maven-publish`
     signing
 }
@@ -220,4 +221,10 @@ publishing {
             }
         }
     }
+}
+
+nexusStaging {
+    username = ossUser
+    password = ossPassword
+    packageGroup = publishedGroupId
 }
