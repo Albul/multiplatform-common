@@ -4,22 +4,46 @@ import org.gradle.api.publish.PublishingExtension
 
 plugins {
     id("kotlin-multiplatform")
+    id("org.jetbrains.dokka") version "1.4.0-rc"
     `maven-publish`
     signing
 }
+
+enum class OS {
+    LINUX, WINDOWS, MAC
+}
+
+fun getHostOsName(): OS =
+    System.getProperty("os.name").let { osName ->
+        when {
+            osName == "Linux" -> OS.LINUX
+            osName.startsWith("Windows") -> OS.WINDOWS
+            osName.startsWith("Mac") -> OS.MAC
+            else -> throw GradleException("Unknown OS: $osName")
+        }
+    }
 
 kotlin {
     sourceSets {
         jvm()
         js() {
+            nodejs()
             browser()
         }
-        linuxX64()
-        linuxArm64()
-        mingwX64()
-        macosX64()
-        iosArm64()
-        iosX64()
+        when (getHostOsName()) {
+            OS.LINUX -> {
+                linuxX64()
+                linuxArm64()
+            }
+            OS.WINDOWS -> {
+                mingwX64()
+            }
+            OS.MAC -> {
+                macosX64()
+                iosArm64()
+                iosX64()
+            }
+        }
 
         val commonMain by getting {
             dependencies {
@@ -59,41 +83,49 @@ kotlin {
             }
         }
 
-        val linuxX64Main by getting {
-            dependsOn(nativeMain)
-        }
-        val linuxArm64Main by getting {
-            dependsOn(nativeMain)
-        }
-        val mingwX64Main by getting {
-            dependsOn(nativeMain)
-        }
-        val macosX64Main by getting {
-            dependsOn(nativeMain)
-        }
-        val iosArm64Main by getting {
-            dependsOn(nativeMain)
-        }
-        val iosX64Main by getting {
-            dependsOn(nativeMain)
+        when (getHostOsName()) {
+            OS.LINUX -> {
+                val linuxX64Main by getting {
+                    dependsOn(nativeMain)
+                }
+                val linuxArm64Main by getting {
+                    dependsOn(nativeMain)
+                }
+            }
+            OS.WINDOWS -> {
+                val mingwX64Main by getting {
+                    dependsOn(nativeMain)
+                }
+            }
+            OS.MAC -> {
+                val macosX64Main by getting {
+                    dependsOn(nativeMain)
+                }
+                val iosArm64Main by getting {
+                    dependsOn(nativeMain)
+                }
+                val iosX64Main by getting {
+                    dependsOn(nativeMain)
+                }
+            }
         }
     }
-
-//    targets {
-//        jvm() {
-//            /* ... */
-//            mavenPublication {
-//                //artifactId = 'sample-lib-jvm'
-//                artifact(jvmJavadocJar)
-//            }
-//        }
-//    }
 }
 
 tasks {
-    val javadocsJar by creating(Jar::class) {
+    create<Jar>("javadocJar") {
+        dependsOn(dokkaJavadoc)
         archiveClassifier.set("javadoc")
-        from(JavaPlugin.JAVADOC_TASK_NAME)
+        from(dokkaJavadoc.get().outputDirectory)
+    }
+
+    dokkaJavadoc {
+        dokkaSourceSets {
+            create("commonMain") {
+                displayName = "common"
+                platform = "common"
+            }
+        }
     }
 }
 
@@ -128,6 +160,10 @@ val developerId: String by project
 project.group = publishedGroupId
 project.version = libraryVersion
 
+signing {
+    sign(publishing.publications)
+}
+
 afterEvaluate {
     configure<PublishingExtension> {
         publications.all {
@@ -138,42 +174,39 @@ afterEvaluate {
     }
 }
 
-configure<PublishingExtension> {
-    publications {
-        withType<MavenPublication> {
-            groupId = publishedGroupId
-            artifactId = artifactName
-            version = libraryVersion
+publishing {
+    publications.withType(MavenPublication::class) {
+        groupId = publishedGroupId
+        artifactId = artifactName
+        version = libraryVersion
 
-            artifact(tasks.findByName("javadocsJar"))
-            artifact(tasks.findByName("sourcesJar"))
+        artifact(tasks["javadocJar"])
 
-            pom {
-                name.set(libraryName)
-                description.set(libraryDescription)
+        pom {
+            name.set(libraryName)
+            description.set(libraryDescription)
+            url.set(siteUrl)
+
+            licenses {
+                license {
+                    name.set(licenseName)
+                    url.set(licenseUrl)
+                }
+            }
+            developers {
+                developer {
+                    id.set(developerId)
+                    name.set(developerName)
+                    email.set(developerEmail)
+                }
+            }
+            organization {
+                name.set(developerOrg)
+            }
+            scm {
+                connection.set(gitUrl)
+                developerConnection.set(gitUrl)
                 url.set(siteUrl)
-
-                licenses {
-                    license {
-                        name.set(licenseName)
-                        url.set(licenseUrl)
-                    }
-                }
-                developers {
-                    developer {
-                        id.set(developerId)
-                        name.set(developerName)
-                        email.set(developerEmail)
-                    }
-                }
-                organization {
-                    name.set(developerOrg)
-                }
-                scm {
-                    connection.set(gitUrl)
-                    developerConnection.set(gitUrl)
-                    url.set(siteUrl)
-                }
             }
         }
     }
@@ -187,13 +220,4 @@ configure<PublishingExtension> {
             }
         }
     }
-}
-
-signing {
-    //sign(publishing.publications)
-
-    publishing.publications.forEach { publication ->
-        sign(publication)
-    }
-   // sign(configurations.archives.get().filterNot { it.name.contains("dokka") })
 }
