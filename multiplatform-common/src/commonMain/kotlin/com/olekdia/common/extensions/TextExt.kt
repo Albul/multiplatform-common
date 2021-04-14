@@ -47,7 +47,7 @@ fun StringBuilder.removeLast(): StringBuilder =
  * Do not throw NumberFormatException, instead returns [fallbackValue]
  */
 fun String?.toIntOr(fallbackValue: Int): Int {
-    if (this == null) return fallbackValue
+    if (this.isNullOrEmpty()) return fallbackValue
 
     val zeroCharCode: Int = '0'.toInt()
 

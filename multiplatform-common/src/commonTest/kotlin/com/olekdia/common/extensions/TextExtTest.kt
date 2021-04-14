@@ -129,6 +129,9 @@ class TextExtTest {
         assertEquals(0, "-21474A83648".toIntOrZero())
         assertEquals(0, "-2147D".toIntOrZero())
         assertEquals(0, "$".toIntOrZero())
+        assertEquals(0, "".toIntOrZero())
+        assertEquals(0, "   ".toIntOrZero())
+        assertEquals(0, null.toIntOrZero())
     }
 
     @Test
@@ -149,6 +152,9 @@ class TextExtTest {
         assertEquals(INVALID, "-21474A83648".toIntOr(INVALID))
         assertEquals(INVALID, "-2147D".toIntOr(INVALID))
         assertEquals(INVALID, "$".toIntOr(INVALID))
+        assertEquals(325, "".toIntOr(325))
+        assertEquals(325, "   ".toIntOr(325))
+        assertEquals(325, null.toIntOr(325))
     }
 
     @Test
