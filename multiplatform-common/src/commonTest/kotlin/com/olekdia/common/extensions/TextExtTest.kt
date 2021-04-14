@@ -354,6 +354,36 @@ class TextExtTest {
         assertFalse(null.containsNullable("", ignoreCase = true))
         assertFalse(null.containsNullable(null, ignoreCase = true))
         assertFalse(null.containsNullable("Kotlin", ignoreCase = true))
+
+
+        val str2 = "<![CDATA[\n25\n\n325,333\n\n\n]]>We're happy to announce that Kotlin scripting support will be available in Gradle 3.0"
+        val cdataOffset = str2.indexOf("]]>") + "]]>".length
+
+        assertTrue(str2.containsNullable("Gradle", ignoreCase = true))
+        assertTrue(str2.containsNullable("Gradle", ignoreCase = true, offset = cdataOffset))
+        assertTrue(str2.containsNullable("CDATA", ignoreCase = true))
+        assertFalse(str2.containsNullable("CDATA", ignoreCase = true, offset = cdataOffset))
+
+        assertTrue(str2.containsNullable("333", ignoreCase = true))
+        assertFalse(str2.containsNullable("333", ignoreCase = true, offset = cdataOffset))
+
+        assertTrue(str2.containsNullable("25", ignoreCase = true))
+        assertFalse(str2.containsNullable("25", ignoreCase = true, offset = cdataOffset))
+
+        assertTrue(str2.containsNullable("]]", ignoreCase = true))
+        assertFalse(str2.containsNullable("]]", ignoreCase = true, offset = cdataOffset))
+
+        assertTrue(str2.containsNullable("]]>", ignoreCase = true))
+        assertFalse(str2.containsNullable("]]>", ignoreCase = true, offset = cdataOffset))
+
+        assertTrue(str2.containsNullable(">", ignoreCase = true))
+        assertFalse(str2.containsNullable(">", ignoreCase = true, offset = cdataOffset))
+
+        assertTrue(str2.containsNullable("We", ignoreCase = true))
+        assertTrue(str2.containsNullable("We", ignoreCase = true, offset = cdataOffset))
+
+        assertTrue(str2.containsNullable("We're happy", ignoreCase = true))
+        assertTrue(str2.containsNullable("We're happy", ignoreCase = true, offset = cdataOffset))
     }
 
     @Test

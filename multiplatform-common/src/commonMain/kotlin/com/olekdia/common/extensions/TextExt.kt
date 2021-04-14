@@ -146,7 +146,8 @@ fun String?.equalsNullable(other: String?, ignoreCase: Boolean = false): Boolean
  * nothing contains null,
  * every non null string contains empty string
  */
-fun String?.containsNullable(searched: String?, ignoreCase: Boolean = true): Boolean {
+@JvmOverloads
+fun String?.containsNullable(searched: String?, ignoreCase: Boolean = true, offset: Int = 0): Boolean {
     if (this == null) {
         return false
     } else {
@@ -160,7 +161,7 @@ fun String?.containsNullable(searched: String?, ignoreCase: Boolean = true): Boo
             else -> {
                 val length: Int = searched.length
 
-                for (i in this.length - length downTo 0) {
+                for (i in this.length - length downTo offset) {
                     if (this.regionMatches(i, searched, 0, length, ignoreCase = ignoreCase)) {
                         return true
                     }
