@@ -105,7 +105,7 @@ class MathExtTest {
         val end = 9
 
         assertFails {
-            val r = getRandom(start, end)
+            getRandom(start, end)
         }
     }
 
@@ -127,7 +127,7 @@ class MathExtTest {
         val end = 9L
 
         assertFails {
-            val r = getRandom(start, end)
+            getRandom(start, end)
         }
     }
 
@@ -149,7 +149,7 @@ class MathExtTest {
         val end = 4.5F
 
         assertFails {
-            val r = getRandom(start, end)
+            getRandom(start, end)
         }
     }
 
@@ -171,7 +171,7 @@ class MathExtTest {
         val end = 4.5
 
         assertFails {
-            val r = getRandom(start, end)
+            getRandom(start, end)
         }
     }
 
@@ -218,7 +218,7 @@ class MathExtTest {
     @Test
     fun getRandomIntArray_zeroSize_fails() {
         assertFails {
-            val r = getRandom(intArrayOf())
+            getRandom(intArrayOf())
         }
     }
 
@@ -244,7 +244,7 @@ class MathExtTest {
     @Test
     fun getRandomLongArray_zeroSize_fails() {
         assertFails {
-            val r = getRandom(longArrayOf())
+            getRandom(longArrayOf())
         }
     }
 
@@ -255,7 +255,7 @@ class MathExtTest {
         )
         for (i in 0..100) {
             val r = getRandom(array)
-            assertTrue(array.contains(r))
+            assertTrue(array.any { it == r })
         }
 
         val arraySingle = floatArrayOf(
@@ -270,7 +270,7 @@ class MathExtTest {
     @Test
     fun getRandomFloatArray_zeroSize_fails() {
         assertFails {
-            val r = getRandom(floatArrayOf())
+            getRandom(floatArrayOf())
         }
     }
 
@@ -281,7 +281,7 @@ class MathExtTest {
         )
         for (i in 0..100) {
             val r = getRandom(array)
-            assertTrue(array.contains(r))
+            assertTrue(array.any { it == r })
         }
 
         val arraySingle = doubleArrayOf(
@@ -296,7 +296,7 @@ class MathExtTest {
     @Test
     fun getRandomDoubleArray_zeroSize_fails() {
         assertFails {
-            val r = getRandom(doubleArrayOf())
+            getRandom(doubleArrayOf())
         }
     }
 
@@ -322,7 +322,7 @@ class MathExtTest {
     @Test
     fun getRandomCharArray_zeroSize_fails() {
         assertFails {
-            val r = getRandom(charArrayOf())
+            getRandom(charArrayOf())
         }
     }
 
@@ -348,7 +348,7 @@ class MathExtTest {
     @Test
     fun getRandomBooleanArray_zeroSize_fails() {
         assertFails {
-            val r = getRandom(booleanArrayOf())
+            getRandom(booleanArrayOf())
         }
     }
 
@@ -374,7 +374,7 @@ class MathExtTest {
     @Test
     fun getRandomStringArray_zeroSize_fails() {
         assertFails {
-            val r = getRandom(arrayOf<String>())
+            getRandom(arrayOf<String>())
         }
     }
 
@@ -400,7 +400,7 @@ class MathExtTest {
     @Test
     fun getRandomAnyArray_zeroSize_fails() {
         assertFails {
-            val r = getRandom(arrayOf<Any>())
+            getRandom(arrayOf<Any>())
         }
     }
 

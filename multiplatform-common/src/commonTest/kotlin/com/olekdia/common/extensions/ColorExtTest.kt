@@ -175,29 +175,29 @@ class ColorExtTest {
 
     @Test
     fun toArgbStringTest() {
-        assertEquals("#AB00FF00", 0xAB00FF00.toInt().toArgbString().toUpperCase())
-        assertEquals("#FF01FF94", 0xFF01FF94.toInt().toArgbString().toUpperCase())
-        assertEquals("#1201FF00", 0x1201FF00.toInt().toArgbString().toUpperCase())
-        assertEquals("#0001FF00", 0x0001FF00.toInt().toArgbString().toUpperCase())
-        assertEquals("#0000FF00", 0x0000FF00.toInt().toArgbString().toUpperCase())
-        assertEquals("#FF000000", 0xFF000000.toInt().toArgbString().toUpperCase())
-        assertEquals("#FF000001", 0xFF000001.toInt().toArgbString().toUpperCase())
-        assertEquals("#00000001", 0x00000001.toInt().toArgbString().toUpperCase())
-        assertEquals("#00000000", 0.toArgbString().toUpperCase())
-        assertEquals("#00100010", 0x00100010.toArgbString().toUpperCase())
+        assertEquals("#AB00FF00", 0xAB00FF00.toInt().toArgbString().uppercase())
+        assertEquals("#FF01FF94", 0xFF01FF94.toInt().toArgbString().uppercase())
+        assertEquals("#1201FF00", 0x1201FF00.toInt().toArgbString().uppercase())
+        assertEquals("#0001FF00", 0x0001FF00.toInt().toArgbString().uppercase())
+        assertEquals("#0000FF00", 0x0000FF00.toInt().toArgbString().uppercase())
+        assertEquals("#FF000000", 0xFF000000.toInt().toArgbString().uppercase())
+        assertEquals("#FF000001", 0xFF000001.toInt().toArgbString().uppercase())
+        assertEquals("#00000001", 0x00000001.toInt().toArgbString().uppercase())
+        assertEquals("#00000000", 0.toArgbString().uppercase())
+        assertEquals("#00100010", 0x00100010.toArgbString().uppercase())
     }
 
     @Test
     fun toRgbStringTest() {
-        assertEquals("#00FF00", 0xAB00FF00.toInt().toRgbString().toUpperCase())
-        assertEquals("#01FF94", 0xFF01FF94.toInt().toRgbString().toUpperCase())
-        assertEquals("#01FF00", 0x1201FF00.toInt().toRgbString().toUpperCase())
-        assertEquals("#01FF00", 0x0001FF00.toInt().toRgbString().toUpperCase())
-        assertEquals("#00FF00", 0x0000FF00.toInt().toRgbString().toUpperCase())
-        assertEquals("#000000", 0xFF000000.toInt().toRgbString().toUpperCase())
-        assertEquals("#000001", 0xFF000001.toInt().toRgbString().toUpperCase())
-        assertEquals("#000001", 0x00000001.toInt().toRgbString().toUpperCase())
-        assertEquals("#000000", 0.toRgbString().toUpperCase())
-        assertEquals("#100010", 0x00100010.toRgbString().toUpperCase())
+        assertEquals("#00FF00", 0xAB00FF00.toInt().toRgbString().uppercase())
+        assertEquals("#01FF94", 0xFF01FF94.toInt().toRgbString().uppercase())
+        assertEquals("#01FF00", 0x1201FF00.toInt().toRgbString().uppercase())
+        assertEquals("#01FF00", 0x0001FF00.toInt().toRgbString().uppercase())
+        assertEquals("#00FF00", 0x0000FF00.toInt().toRgbString().uppercase())
+        assertEquals("#000000", 0xFF000000.toInt().toRgbString().uppercase())
+        assertEquals("#000001", 0xFF000001.toInt().toRgbString().uppercase())
+        assertEquals("#000001", 0x00000001.toInt().toRgbString().uppercase())
+        assertEquals("#000000", 0.toRgbString().uppercase())
+        assertEquals("#100010", 0x00100010.toRgbString().uppercase())
     }
 }

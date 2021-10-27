@@ -49,7 +49,7 @@ fun StringBuilder.removeLast(): StringBuilder =
 fun String?.toIntOr(fallbackValue: Int): Int {
     if (this.isNullOrEmpty()) return fallbackValue
 
-    val zeroCharCode: Int = '0'.toInt()
+    val zeroCharCode: Int = '0'.code
 
     var num = 0
     var skipFirstChar = false
@@ -61,7 +61,7 @@ fun String?.toIntOr(fallbackValue: Int): Int {
 
     // Build the number
     for (i in (if (skipFirstChar) 1 else 0) until this.length) {
-        val digit = zeroCharCode - this[i].toInt()
+        val digit = zeroCharCode - this[i].code
         if (digit < -9 || digit > 0) return fallbackValue
         num = num * 10 + digit
     }
@@ -273,7 +273,7 @@ fun Char.isISOControl(): Boolean =
  * through '\u005Cu001F' or in the range
  */
 fun Char.Companion.isISOControl(ch: Char): Boolean =
-    Char.isISOControl(ch.toInt())
+    Char.isISOControl(ch.code)
 
 /**
  * Determines if the referenced character (Unicode code point) is an ISO control
